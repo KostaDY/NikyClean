@@ -1,0 +1,10 @@
+SSE_Scaffold_Files.xlsx
+.ipynb_checkpoints/
+~kostayanev/hor/$GitHor1.xlsx
+~kostayanev/hor/$RTMED.xlsm
+~$*.xlsm
+~myenv
+.ignore
+myenv/
+SSE_Scaffold_Files
+SSE_Scaffold_Files/
