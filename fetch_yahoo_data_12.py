@@ -85,8 +85,8 @@ def main():
         df_result = pd.DataFrame(results)
 
         # Export with percent formatting
-        with pd.ExcelWriter("YahooDataOutput.xlsx", engine="xlsxwriter") as writer:
-            df_result.to_excel(writer, index=False, sheet_name="Data")
+        with pd.ExcelWriter("RTMED.xlsm", engine="xlsxwriter") as writer:
+            df_result.to_excel(writer, index=False, sheet_name="YData")
             workbook = writer.book
             worksheet = writer.sheets["Data"]
 
