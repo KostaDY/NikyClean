@@ -9,3 +9,24 @@ myenv/
 SSE_Scaffold_Files
 SSE_Scaffold_Files/
 ~$*
+# LiveSession runtime files (do NOT commit)
+live/
+live/*
+
+# Auto-generated Excel files
+Data_Load.xlsx
+Session_Export.xlsx
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Excel lock files
+~$*.xls*
+
+# Virtual environments
+venv/
+env/
+virtual/
+create/
+legacy/
