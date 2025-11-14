@@ -16,7 +16,8 @@ live/*
 # Auto-generated Excel files
 Data_Load.xlsx
 Session_Export.xlsx
-
+__pycache__/
+*.pyc
 # Python cache
 __pycache__/
 *.pyc
@@ -30,3 +31,4 @@ env/
 virtual/
 create/
 legacy/
+
