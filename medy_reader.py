@@ -25,7 +25,7 @@ def read_medy(path, sheet_name="DataRT"):
     # Relevant columns for Live Session
     rename_map = {
         "Ticker_Symbol": "Ticker",
-        "M-Price": "Last",
+        "M_Price": "Last",
         "Last_trade_time": "Time",
         "Change%": "ChangePct",
     }
