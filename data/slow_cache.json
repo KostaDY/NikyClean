@@ -1,0 +1,770 @@
+{
+  "ADEA": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "ASML": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "AAPL": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "AMZN": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "AET": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "ALDNE": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "AZN": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "AVGO": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "BLDP": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "BMRA": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "DIS": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "C": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "DSY": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "CVS": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "DDD": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "CSCO": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "EPIX": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "DVA": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "HPE": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "EOAN": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "HPQ": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "IAG": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "DXC": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "GM": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "LNSR": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "LUMN": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MSFT": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "NFLX": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "NEM": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "NEE": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MRNA": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "KR": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "NOTE": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "SAP": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "PROF": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "POET": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "PW": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "PAAS": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "RIGL": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "RWE": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "TSM": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "SSYS": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "SHECY": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "TSLA": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "UN0": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "UNIT": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "VLVLY": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "VONN": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "VTRS": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MVEDDD": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MVEDSY": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MVEEOAN": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MVEALDNE": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "WBA": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "XOM": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "XPER": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MVEENI": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MVEEPIX": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MVEGLE": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "SAFAAPL": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MVERWE": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MVEUN0": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MVEORA": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MVESAP": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "SAFDIS": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "SAFASML": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "SAFAMZN": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "BLNK": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "SAFMRNA": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "SAFIAG": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "SAFGM": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "SAFDDD": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "GLE": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "F": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "GS": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "ENI": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "EZJ": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "GNRC": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "LUV": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "LAZR": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "NVS": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "MA": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "RRC": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "OXY": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "PFE": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "NVAX": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "RIG": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "ORA": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "XYZ": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "LOCK": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "JBEOAN": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "THC": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "Couple": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-14"
+  },
+  "JBASML": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "X": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  },
+  "Total": {
+    "Beta": null,
+    "1YT": null,
+    "Ddate": null,
+    "EarningDate": null,
+    "RepDiv": null,
+    "date": "2025-11-15"
+  }
+}
