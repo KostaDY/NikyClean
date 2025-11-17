@@ -1,41 +1,55 @@
+#!/usr/bin/env python3
+"""
+Minimal, stable live Session:
+
+- Reads tickers from DataSource.xlsx / DataRT / RTData / Ticker_Symbol
+- Preserves row order and empty rows
+- Fetches FAST fields via yahooquery:
+    Ticker, RefreshTime, Close, Open, Last, Low, High,
+    P/E, Change, ChangePct, Volume, VolumeAverage
+- Writes clean DataSource_Raw.xlsx with table RTData_Raw
+- SLOW fields (Beta, 1YT, Ddate, EarningDate, RepDiv) are left as None
+  so you can fill them via Excel formulas if you wish.
+
+This avoids all crumb/HTML/JSON hassles and focuses on a rock-solid FAST path.
+"""
+
 from __future__ import annotations
 
 import argparse
-import json
-import platform
-import subprocess
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, date
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import pandas as pd
-import requests
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
+from openpyxl.utils.cell import range_boundaries
 from yahooquery import Ticker
 
 # --------------------------------------------------------------------
 # Paths & constants
 # --------------------------------------------------------------------
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent  # .../NikyClean
 EXCEL_DIR = ROOT / "excel"
 DATASOURCE_XLSX = EXCEL_DIR / "DataSource.xlsx"
 RAW_XLSX = EXCEL_DIR / "DataSource_Raw.xlsx"
-CACHE_DIR = ROOT / "data"
-CACHE_DIR.mkdir(exist_ok=True)
-SLOW_CACHE_JSON = CACHE_DIR / "slow_cache.json"
 
-RTDATA_SHEET = "DataRT"
-RTDATA_TICKER_COL = "Ticker_Symbol"
+# Input location
+RT_SHEET = "DataRT"
+RT_TABLE_NAME = "RTData"
+RT_TICKER_COL_NAME = "Ticker_Symbol"
 
+# Output sheet / table
 RAW_SHEET = "RTData_Raw"
 RAW_TABLE_NAME = "RTData_Raw"
 
+# Column layout (FAST + placeholder SLOW)
 COLUMNS = [
     "Ticker",
+    "RefreshTime",
     "Close",
     "Open",
     "Last",
@@ -55,6 +69,7 @@ COLUMNS = [
 
 FAST_COLS = [
     "Ticker",
+    "RefreshTime",
     "Close",
     "Open",
     "Last",
@@ -86,128 +101,164 @@ def now_str() -> str:
     return datetime.now().strftime("%H:%M:%S")
 
 
-def load_slow_cache() -> Dict[str, Dict[str, Any]]:
-    if not SLOW_CACHE_JSON.exists():
-        return {}
-    try:
-        with SLOW_CACHE_JSON.open("r", encoding="utf-8") as f:
-            data = json.load(f)
-        return data if isinstance(data, dict) else {}
-    except Exception:
-        return {}
-
-
-def save_slow_cache(cache: Dict[str, Dict[str, Any]]) -> None:
-    try:
-        with SLOW_CACHE_JSON.open("w", encoding="utf-8") as f:
-            json.dump(cache, f, ensure_ascii=False, indent=2)
-    except Exception:
-        pass
-
-
 # --------------------------------------------------------------------
-# Step 1: Read tickers from DataSource.xlsx / RTData table
+# Step 1: Read tickers from DataSource.xlsx / DataRT / RTData
 # --------------------------------------------------------------------
 
 
-def read_tickers() -> List[Optional[str]]:
+def read_tickers() -> List[str]:
     """
-    Reads ONLY the Ticker_Symbol column from Excel TABLE RTData.
-    Keeps empty tickers (Option A). Never reads outside the table.
-    """
+    Read ONLY the Ticker_Symbol column from Excel TABLE RTData in sheet DataRT.
 
+    - Preserves row order.
+    - Keeps empty rows (returns "" for them).
+    """
     from openpyxl import load_workbook
-    from openpyxl.utils.cell import range_boundaries
+
+    if not DATASOURCE_XLSX.exists():
+        raise FileNotFoundError(f"Input workbook not found: {DATASOURCE_XLSX}")
 
     wb = load_workbook(DATASOURCE_XLSX, data_only=True)
-    ws = wb[RTDATA_SHEET]
+    if RT_SHEET not in wb.sheetnames:
+        raise ValueError(f"Sheet '{RT_SHEET}' not found in {DATASOURCE_XLSX}")
 
-    # --- locate the RTData Excel table ---
+    ws = wb[RT_SHEET]
+
+    # locate Excel table RTData
     table = None
     for t in ws._tables.values():
-        if t.name == "RTData":
+        if t.name == RT_TABLE_NAME:
             table = t
             break
-
     if table is None:
-        raise ValueError("❌ Excel table RTData not found in sheet DataRT")
+        raise ValueError(f"Excel table '{RT_TABLE_NAME}' not found in sheet '{RT_SHEET}'.")
 
-    # --- parse its boundaries ---
     min_col, min_row, max_col, max_row = range_boundaries(table.ref)
 
-    # --- read the header row ---
+    # header row
     headers = [
-        ws.cell(min_row, col).value for col in range(min_col, max_col + 1)
+        ws.cell(min_row, c).value for c in range(min_col, max_col + 1)
     ]
-    if RTDATA_TICKER_COL not in headers:
+    if RT_TICKER_COL_NAME not in headers:
         raise ValueError(
-            f"❌ Column '{RTDATA_TICKER_COL}' not found in RTData table."
+            f"Column '{RT_TICKER_COL_NAME}' not found in table '{RT_TABLE_NAME}'. "
+            f"Headers: {headers}"
         )
 
-    ticker_col_index = headers.index(RTDATA_TICKER_COL) + min_col
+    ticker_col = headers.index(RT_TICKER_COL_NAME) + min_col
 
-    # --- read tickers ---
     tickers: List[str] = []
     for r in range(min_row + 1, max_row + 1):
-        v = ws.cell(r, ticker_col_index).value
+        v = ws.cell(r, ticker_col).value
         if v is None:
-            v = ""  # keep empty tickers
-        tickers.append(str(v).strip())
+            tickers.append("")  # preserve empty row
+        else:
+            tickers.append(str(v).strip())
 
     return tickers
 
 
 # --------------------------------------------------------------------
-# Step 2: FAST fetch with yahooquery
+# Step 2: FAST fetch via yahooquery
 # --------------------------------------------------------------------
 
 
-def fetch_fast(tickers: List[Optional[str]]) -> pd.DataFrame:
-    # Fast fields via yahooquery: price & summary_detail
+def _get_dict(block: Any, key: str) -> Dict[str, Any]:
+    if not isinstance(block, dict):
+        return {}
+    v = block.get(key)
+    return v if isinstance(v, dict) else {}
+
+
+def _first(d: Dict[str, Any], *keys: str) -> Optional[Any]:
+    for k in keys:
+        if k in d and d[k] is not None:
+            return d[k]
+    return None
+
+
+def fetch_fast(tickers: List[str]) -> pd.DataFrame:
+    """
+    Fetchs FAST fields for all non-empty tickers via yahooquery:
+    Ticker, RefreshTime, Close, Open, Last, Low, High,
+    P/E, Change, ChangePct, Volume, VolumeAverage.
+
+    - Uses yahooquery's internal crumb/session logic.
+    - No 'retry' or 'backoff_factor' args (they break with curl_cffi).
+    """
     syms = [t for t in tickers if t]
     if not syms:
-        return pd.DataFrame({col: [] for col in FAST_COLS})
+        return pd.DataFrame(columns=FAST_COLS)
 
+    # yahooquery Ticker – keep args minimal to avoid curl_cffi issues
     tq = Ticker(syms, asynchronous=True)
 
     raw_price = tq.price or {}
     raw_sd = tq.summary_detail or {}
 
-    def get_dict(d: Any, key: str) -> Dict[str, Any]:
-        v = d.get(key)
-        return v if isinstance(v, dict) else {}
+    # Normalize to {symbol: dict}
+    price: Dict[str, Dict[str, Any]] = {
+        s: _get_dict(raw_price, s) for s in syms
+    }
+    sd: Dict[str, Dict[str, Any]] = {
+        s: _get_dict(raw_sd, s) for s in syms
+    }
 
-    price = {s: get_dict(raw_price, s) for s in syms}
-    sd = {s: get_dict(raw_sd, s) for s in syms}
-
-    rows: Dict[str, Dict[str, Any]] = {}
+    rows_by_symbol: Dict[str, Dict[str, Any]] = {}
 
     for s in syms:
-        p = price.get(s, {})
-        d = sd.get(s, {})
+        p = price.get(s, {}) or {}
+        d = sd.get(s, {}) or {}
 
-        close = d.get("regularMarketPreviousClose") or p.get("regularMarketPreviousClose")
-        open_ = d.get("regularMarketOpen") or p.get("regularMarketOpen")
-        last = p.get("regularMarketPrice") or d.get("regularMarketPrice")
-        low = d.get("regularMarketDayLow") or p.get("regularMarketDayLow")
-        high = d.get("regularMarketDayHigh") or p.get("regularMarketDayHigh")
-        pe = d.get("trailingPE") or p.get("trailingPE")
+        close = _first(d, "regularMarketPreviousClose", "previousClose") or \
+            _first(p, "regularMarketPreviousClose", "previousClose")
+        open_ = _first(d, "regularMarketOpen") or _first(p, "regularMarketOpen")
+        last = _first(p, "regularMarketPrice", "postMarketPrice", "preMarketPrice") or \
+            _first(d, "regularMarketPrice")
+        low = _first(d, "regularMarketDayLow") or _first(p, "regularMarketDayLow")
+        high = _first(d, "regularMarketDayHigh") or _first(p, "regularMarketDayHigh")
+        pe = _first(d, "trailingPE") or _first(p, "trailingPE")
 
-        change = d.get("regularMarketChange") or p.get("regularMarketChange")
-        change_pct = d.get("regularMarketChangePercent") or p.get("regularMarketChangePercent")
+        change = _first(p, "regularMarketChange", "postMarketChange", "preMarketChange") or \
+            _first(d, "regularMarketChange")
+        change_pct = _first(
+            p,
+            "regularMarketChangePercent",
+            "postMarketChangePercent",
+            "preMarketChangePercent",
+        ) or _first(d, "regularMarketChangePercent")
 
         if change_pct is not None:
             try:
+                # yahooquery sometimes returns percent as 1.23 instead of 0.0123
                 if abs(change_pct) > 1:
                     change_pct = change_pct / 100.0
             except Exception:
                 pass
 
-        volume = d.get("regularMarketVolume") or p.get("regularMarketVolume")
-        volavg = d.get("averageVolume") or p.get("averageVolume")
+        volume = _first(p, "regularMarketVolume") or _first(d, "regularMarketVolume")
+        volavg = _first(d, "averageVolume", "averageDailyVolume10Day") or \
+            _first(p, "averageVolume")
 
-        rows[s] = {
+        # last trade timestamp: prefer regular session
+        rt_ts = _first(
+            p,
+            "regularMarketTime",
+            "postMarketTime",
+            "preMarketTime",
+        ) or _first(d, "regularMarketTime")
+
+        if isinstance(rt_ts, (int, float)):
+            try:
+                refresh_time = datetime.fromtimestamp(rt_ts)
+            except Exception:
+                refresh_time = None
+        else:
+            refresh_time = None
+
+        rows_by_symbol[s] = {
             "Ticker": s,
+            "RefreshTime": refresh_time,
             "Close": close,
             "Open": open_,
             "Last": last,
@@ -220,143 +271,44 @@ def fetch_fast(tickers: List[Optional[str]]) -> pd.DataFrame:
             "VolumeAverage": volavg,
         }
 
-    empty_fast = {col: None for col in FAST_COLS}
-    empty_fast["Ticker"] = None
+    # Row set for tickers with no data but non-empty symbol
+    empty_fast_template = {col: None for col in FAST_COLS}
 
-    result_rows = []
+    result_rows: List[Dict[str, Any]] = []
     for t in tickers:
-        if t and t in rows:
-            result_rows.append(rows[t])
+        if not t:
+            row = empty_fast_template.copy()
+            row["Ticker"] = ""
+            result_rows.append(row)
         else:
-            result_rows.append(empty_fast.copy())
+            row = rows_by_symbol.get(t)
+            if row is None:
+                row = empty_fast_template.copy()
+                row["Ticker"] = t
+            result_rows.append(row)
 
-    df = pd.DataFrame(result_rows)
-    for col in FAST_COLS:
-        if col not in df.columns:
-            df[col] = None
-
-    return df[FAST_COLS]
+    df = pd.DataFrame(result_rows, columns=FAST_COLS)
+    return df
 
 
 # --------------------------------------------------------------------
-# Step 3: SLOW fetch via Yahoo JSON API + caching + threads
+# Step 3: SLOW fields – stub (left None on purpose)
 # --------------------------------------------------------------------
 
 
-def _get_raw(block: Dict[str, Any], key: str) -> Optional[Any]:
-    v = block.get(key)
-    if isinstance(v, dict):
-        return v.get("raw")
-    return None
-
-
-def _fetch_slow_one(symbol: str) -> Dict[str, Any]:
-    # Fetch slow fields for a single ticker from Yahoo quoteSummary JSON.
-    url = f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/{symbol}"
-    params = {
-        "modules": "financialData,defaultKeyStatistics,calendarEvents",
-    }
-
-    try:
-        r = requests.get(url, params=params, timeout=5)
-        r.raise_for_status()
-        data = r.json()
-    except Exception:
-        return {
-            "Beta": None,
-            "1YT": None,
-            "Ddate": None,
-            "EarningDate": None,
-            "RepDiv": None,
-        }
-
-    try:
-        result = (data.get("quoteSummary", {}).get("result") or [None])[0] or {}
-    except Exception:
-        result = {}
-
-    fd = result.get("financialData", {}) or {}
-    ks = result.get("defaultKeyStatistics", {}) or {}
-    ce = result.get("calendarEvents", {}) or {}
-
-    beta = _get_raw(ks, "beta")
-    target = _get_raw(fd, "targetMeanPrice")
-
-    # dividend yield as fraction, e.g. 0.034
-    div_yield = _get_raw(fd, "dividendYield")
-
-    # ex-dividend date
-    ex_div_ts = _get_raw(fd, "exDividendDate")
-    if ex_div_ts is None:
-        ex_div_ts = _get_raw(ce, "exDividendDate")
-    if isinstance(ex_div_ts, (int, float)):
-        try:
-            ddate = datetime.utcfromtimestamp(ex_div_ts).date()
-        except Exception:
-            ddate = None
-    else:
-        ddate = None
-
-    # earnings date - usually list of timestamps in calendarEvents
-    earnings_date = None
-    earnings = ce.get("earnings", {}) or {}
-    ed_list = earnings.get("earningsDate")
-    if isinstance(ed_list, list) and ed_list:
-        ed0 = ed_list[0]
-        ed_raw = ed0.get("raw") if isinstance(ed0, dict) else None
-        if isinstance(ed_raw, (int, float)):
-            try:
-                earnings_date = datetime.utcfromtimestamp(ed_raw).date()
-            except Exception:
-                earnings_date = None
-
-    return {
-        "Beta": beta,
-        "1YT": target,
-        "Ddate": ddate,
-        "EarningDate": earnings_date,
-        "RepDiv": div_yield,
-    }
-
-import re
-from bs4 import BeautifulSoup
-
-HEADERS = {"User-Agent": "Mozilla/5.0"}
-
-def html_fetch_slow_fields(ticker: str):
+def fetch_slow_stub(tickers: List[str]) -> pd.DataFrame:
     """
-    Scrape: Beta, 1-year target price, ex-dividend date,
-    earnings date, dividend yield.
-    Returns: (beta, target, exdiv, earnings, divyield)
+    Stub for SLOW fields.
+
+    Given the current external blocking from Yahoo JSON and HTML,
+    this returns an all-None DataFrame with the correct shape,
+    so you can:
+      - keep the column structure,
+      - fill Beta / 1YT / Ddate / EarningDate / RepDiv via Excel formulas.
+
+    Each row corresponds 1:1 to 'tickers'.
     """
-    url = f"https://finance.yahoo.com/quote/{ticker}"
-    try:
-        html = requests.get(url, headers=HEADERS, timeout=10).text
-    except:
-        return None, None, None, None, None
-
-    soup = BeautifulSoup(html, "lxml")
-
-    def extract(label):
-        m = soup.find("span", string=re.compile(label, re.I))
-        if not m:
-            return None
-        v = m.find_next("span")
-        return v.text.strip() if v else None
-
-    beta = extract("Beta")
-    tgt = extract("1y Target Est")
-    exdiv = extract("Ex-Dividend Date")
-    earnings = extract("Earnings Date")
-    divy = extract("Dividend Yield")
-
-    return beta, tgt, exdiv, earnings, divy
-def fetch_slow(tickers: List[str]) -> pd.DataFrame:
-    """
-    Reliable slow-mode: strictly HTML scraping.
-    No yahooquery for slow fields.
-    """
-    out = {
+    data = {
         "Ticker": [],
         "Beta": [],
         "1YT": [],
@@ -364,46 +316,71 @@ def fetch_slow(tickers: List[str]) -> pd.DataFrame:
         "EarningDate": [],
         "RepDiv": [],
     }
-
     for t in tickers:
-        if not t:
-            # preserve empty tickers
-            out["Ticker"].append("")
-            out["Beta"].append(None)
-            out["1YT"].append(None)
-            out["Ddate"].append(None)
-            out["EarningDate"].append(None)
-            out["RepDiv"].append(None)
-            continue
+        data["Ticker"].append(t)
+        data["Beta"].append(None)
+        data["1YT"].append(None)
+        data["Ddate"].append(None)
+        data["EarningDate"].append(None)
+        data["RepDiv"].append(None)
 
-        beta, tgt, exdiv, earnings, divy = html_fetch_slow_fields(t)
+    return pd.DataFrame(data, columns=SLOW_COLS)
 
-        out["Ticker"].append(t)
-        out["Beta"].append(beta)
-        out["1YT"].append(tgt)
-        out["Ddate"].append(exdiv)
-        out["EarningDate"].append(earnings)
-        out["RepDiv"].append(divy)
 
-    return pd.DataFrame(out)
+# --------------------------------------------------------------------
+# Step 4: Write Excel with formatting
+# --------------------------------------------------------------------
 
-def write_raw_excel(df: pd.DataFrame):
+
+def write_raw_excel(df: pd.DataFrame) -> None:
     """
-    Creates DataSource_Raw.xlsx with a clean RTData_Raw sheet + header + table formatting.
+    Creates DataSource_Raw.xlsx with a clean RTData_Raw sheet + table.
+
+    - Applies number formats:
+        * Floats: 2 decimals
+        * Percent: 2 decimals
+        * Integers (volumes): 1,000 separator
+        * RefreshTime: yyyy-mm-dd hh:mm:ss
     """
     wb = Workbook()
     ws = wb.active
     ws.title = RAW_SHEET
 
-    # Write headers
+    # Write header
     for col, name in enumerate(df.columns, start=1):
         c = ws.cell(row=1, column=col, value=name)
+        # openpyxl deprecation warning is harmless here
         c.font = c.font.copy(bold=True)
 
-    # Write data rows
-    for r, row in enumerate(df.itertuples(index=False), start=2):
-        for c, value in enumerate(row, start=1):
-            ws.cell(row=r, column=c, value=value)
+    # Write data
+    for r_idx, row in enumerate(df.itertuples(index=False), start=2):
+        for c_idx, value in enumerate(row, start=1):
+            cell = ws.cell(row=r_idx, column=c_idx, value=value)
+
+    # Apply number formats by column name
+    col_index_by_name = {name: idx + 1 for idx, name in enumerate(df.columns)}
+
+    def set_col_format(col_name: str, fmt: str):
+        idx = col_index_by_name.get(col_name)
+        if not idx:
+            return
+        for r in range(2, len(df) + 2):
+            ws.cell(row=r, column=idx).number_format = fmt
+
+    # RefreshTime as datetime
+    set_col_format("RefreshTime", "yyyy-mm-dd hh:mm:ss")
+
+    # Floats: 2 decimals
+    for float_col in ["Close", "Open", "Last", "Low", "High", "P/E", "Beta", "1YT"]:
+        set_col_format(float_col, "0.00")
+
+    # Percentages: 2 decimals (ChangePct & RepDiv stored as fraction)
+    set_col_format("ChangePct", "0.00%")
+    set_col_format("RepDiv", "0.00%")
+
+    # Integers with thousand separator
+    for int_col in ["Volume", "VolumeAverage"]:
+        set_col_format(int_col, "#,##0")
 
     # Create Excel table
     from openpyxl.worksheet.table import Table, TableStyleInfo
@@ -423,31 +400,38 @@ def write_raw_excel(df: pd.DataFrame):
     table.tableStyleInfo = style
     ws.add_table(table)
 
-    # Save workbook
     wb.save(RAW_XLSX)
-def open_excel_file(path: Path):
+
+
+def open_excel_file(path: Path) -> None:
     """
-    Opens the Excel file on macOS using the 'open' command.
-    Safe if file exists, does nothing otherwise.
+    On macOS, open the generated workbook in Excel using 'open'.
+    Safe: only acts if the file exists.
     """
+    import subprocess
+
+    if not path.exists():
+        print(f"⚠ Cannot open — file not found: {path}")
+        return
     try:
-        if path.exists():
-            subprocess.Popen(["open", str(path)])
-        else:
-            print(f"⚠ Cannot open — file not found: {path}")
+        subprocess.Popen(["open", str(path)])
     except Exception as e:
         print(f"⚠ Failed to open Excel file: {e}")
+
+
 # --------------------------------------------------------------------
 # Main
 # --------------------------------------------------------------------
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Live session DataSource → DataSource_Raw pipeline")
+    parser = argparse.ArgumentParser(
+        description="Minimal FAST DataSource → DataSource_Raw pipeline"
+    )
     parser.add_argument(
         "--slow",
         action="store_true",
-        help="also refresh Beta, 1YT, Ddate, EarningDate, RepDiv via Yahoo JSON API (cached daily)",
+        help="(Currently stubbed) also include placeholder columns for Beta, 1YT, Ddate, EarningDate, RepDiv.",
     )
     args = parser.parse_args()
 
@@ -456,31 +440,35 @@ def main() -> None:
 
     t0 = time.time()
     tickers = read_tickers()
+    print(f"✔ Loaded {len(tickers)} tickers from {RT_TABLE_NAME}!{RT_TICKER_COL_NAME}")
     t1 = time.time()
     print(f"⏱ Tickers read in {t1 - t0:.3f} sec")
 
-    # FAST always runs
+    # FAST always
     tf0 = time.time()
     df_fast = fetch_fast(tickers)
     tf1 = time.time()
     print(f"⏱ Fast fetch in {tf1 - tf0:.3f} sec")
 
+    # Start from fast frame
     df = df_fast.copy()
 
     if args.slow:
+        # Currently: stub – keeps correct columns & alignment, values None
         ts0 = time.time()
-        df_slow = fetch_slow(tickers)
-        print("\nDEBUG -- SLOW df columns:", df_slow.columns.tolist())
+        df_slow = fetch_slow_stub(tickers)
+        print("DEBUG -- SLOW df columns:", df_slow.columns.tolist())
         print("DEBUG -- first rows:\n", df_slow.head())
         ts1 = time.time()
-        print(f"⏱ Slow fields fetched in {ts1 - ts0:.3f} sec")
+        print(f"⏱ Slow stub built in {ts1 - ts0:.3f} sec")
 
+        # merge slow columns by position
         for col in SLOW_COLS:
             if col == "Ticker":
                 continue
             df[col] = df_slow[col]
 
-    # Ensure all columns exist
+    # Ensure all defined columns exist
     for col in COLUMNS:
         if col not in df.columns:
             df[col] = None
@@ -494,6 +482,7 @@ def main() -> None:
     print(f"✅ Finished. Total time: {total:.3f} sec")
     print(f"📂 Output: {RAW_XLSX}")
 
+    # Auto-open workbook on macOS
     open_excel_file(RAW_XLSX)
 
 
