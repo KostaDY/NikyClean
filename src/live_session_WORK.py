@@ -222,11 +222,7 @@ def fetch_fast(tickers):
             Change=p.get("regularMarketChange"),
             ChangePct=p.get("regularMarketChangePercent"),
             Volume=p.get("regularMarketVolume"),
-            VolumeAverage=(
-            p.get("averageDailyVolume10Day")
-            or p.get("averageDailyVolume3Month")
-            or p.get("averageDailyVolume")
-            ),
+            VolumeAverage=p.get("averageDailyVolume10Day"),
             Beta=s.get("beta")
         ))
 
@@ -264,8 +260,7 @@ def main():
 
     print("✅ DONE — Saved:", OUTPUT_XLSX)
 
-    import subprocess
-    subprocess.Popen(["open", DATASOURCE_RAW_XLSX])
+
 
 # ============================================================
 
