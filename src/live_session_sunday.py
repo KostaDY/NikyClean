@@ -9,7 +9,6 @@ import time
 import random
 import traceback
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import subprocess
 
 # ============================================================
 # CONFIGURATION
@@ -27,12 +26,15 @@ TIMEOUT = 8
 MAX_WORKERS = 6
 RETRY_DELAY = (1.0, 2.0)
 
-
 # ============================================================
-# READ TICKERS (preserve blanks, preserve order)
+# READ TICKERS (preserve blanks)
 # ============================================================
 
 def read_tickers():
+    """
+    Read tickers from DataSource.xlsx, sheet TickerList, column A.
+    Preserves empty rows exactly.
+    """
     df = pd.read_excel(
         DATASOURCE_XLSX,
         sheet_name=DATASOURCE_SHEET,
@@ -53,8 +55,9 @@ def read_tickers():
     return tickers
 
 
+
 # ============================================================
-# HTML CALENDAR PAGE SCRAPER (Fallback for Earnings Date)
+# HTML CALENDAR PAGE SCRAPER (Your proven MEDY engine)
 # ============================================================
 
 def get_calendar_page(ticker):
@@ -82,51 +85,46 @@ def extract_earnings_date(soup):
 
 
 # ============================================================
-# EXTENDED ENGINE (MEDY)
+# FETCH EXTENDED DATA (YOUR RELIABLE MEDY ENGINE)
 # ============================================================
 
 def fetch_extended_once(ticker):
+    """
+    Only extended fields extracted from your MEDY engine.
+    Beta is intentionally NOT here (comes from yahooquery FAST).
+    """
     try:
         yq = Ticker(ticker)
 
+        # summary_detail
         sd = yq.summary_detail
         sd = sd.get(ticker, {}) if isinstance(sd, dict) else {}
 
+        # financial_data
         fin = yq.financial_data
         fin = fin.get(ticker, {}) if isinstance(fin, dict) else {}
 
         price_info = yq.price
         price_info = price_info.get(ticker, {}) if isinstance(price_info, dict) else {}
 
+        # Extract values
         dividend_yield = sd.get("dividendYield")
-        ex_div_raw = sd.get("exDividendDate")
+        ex_div = sd.get("exDividendDate")
         target = fin.get("targetMeanPrice")
         currency = price_info.get("currency", "")
 
-        # ===== Convert Ex-Dividend date =====
-        ex_div = ""
+        # ex-div conversion
         try:
-            if isinstance(ex_div_raw, (float, int)):
-                ex_div = pd.to_datetime(ex_div_raw, unit="s").strftime("%Y-%m-%d")
+            if isinstance(ex_div, (float, int)):
+                ex_div = pd.to_datetime(ex_div, unit="s").strftime("%Y-%m-%d")
+            else:
+                ex_div = ""
         except Exception:
-            pass
+            ex_div = ""
 
-        # ===== Earnings Date =====
-        earnings_date = ""
-        try:
-            cal = yq.calendar_events
-            earn_raw = cal.get(ticker, {}).get("earningsDate", [])
-            if isinstance(earn_raw, list) and earn_raw:
-                earnings_date = ", ".join(
-                    pd.to_datetime(d, unit="s").strftime("%Y-%m-%d") for d in earn_raw
-                )
-        except Exception:
-            pass
-
-        # HTML fallback
-        if not earnings_date:
-            soup = get_calendar_page(ticker)
-            earnings_date = extract_earnings_date(soup)
+        # earnings date via HTML
+        soup = get_calendar_page(ticker)
+        earnings_date = extract_earnings_date(soup)
 
         return dict(
             Ticker=ticker,
@@ -140,39 +138,42 @@ def fetch_extended_once(ticker):
     except Exception:
         return dict(
             Ticker=ticker,
-            OneYearTarget=None,
-            ExDividendDate="",
-            EarningsDate="",
-            DividendYield=None,
-            Currency=""
+            OneYearTarget=None, ExDividendDate=None,
+            EarningsDate=None, DividendYield=None,
+            Currency=None
         )
 
 
 def fetch_extended(ticker):
+    """Two-attempt wrapper with delay."""
     if ticker == "":
         return dict(
-            Ticker="", OneYearTarget=None, ExDividendDate="",
-            EarningsDate="", DividendYield=None, Currency=""
+            Ticker="", OneYearTarget=None, ExDividendDate=None,
+            EarningsDate=None, DividendYield=None, Currency=None
         )
 
     r = fetch_extended_once(ticker)
+    if r["EarningsDate"] or r["ExDividendDate"]:
+        return r
 
-    # If nothing returned, retry
-    if r["EarningsDate"] == "" and r["ExDividendDate"] == "":
-        time.sleep(random.uniform(*RETRY_DELAY))
-        r = fetch_extended_once(ticker)
+    time.sleep(random.uniform(*RETRY_DELAY))
+    return fetch_extended_once(ticker)
 
-    return r
 
 
 # ============================================================
-# FAST ENGINE (YahooQuery)
+# FAST PRICE DATA (yahooquery)
 # ============================================================
 
 def fetch_fast(tickers):
-
+    """
+    SAFE yahooquery fast fetch:
+    - Handles string, list, None, unexpected formats
+    - Preserves blank rows
+    """
     cleaned = [t for t in tickers if t.strip() != ""]
 
+    # If all are blanks → return empty fast-frame with correct columns
     if not cleaned:
         return pd.DataFrame(columns=[
             "Ticker", "RefreshTime", "Close", "Open", "Last",
@@ -180,38 +181,34 @@ def fetch_fast(tickers):
             "Volume", "VolumeAverage", "Beta"
         ])
 
+    # Create yahooquery object
     tq = Ticker(cleaned)
 
+    # price and summary_detail may be dict OR garbage → normalize to dict
     prices = tq.price if isinstance(tq.price, dict) else {}
     summary = tq.summary_detail if isinstance(tq.summary_detail, dict) else {}
 
     rows = []
-
     for t in tickers:
+
+        # Preserve blank rows
         if t.strip() == "":
             rows.append({
-                "Ticker": "", "RefreshTime": None,
-                "Close": None, "Open": None, "Last": None,
-                "Low": None, "High": None, "PE": None,
-                "Change": None, "ChangePct": None,
-                "Volume": None, "VolumeAverage": None,
+                "Ticker": "",
+                "RefreshTime": None, "Close": None, "Open": None, "Last": None,
+                "Low": None, "High": None, "PE": None, "Change": None,
+                "ChangePct": None, "Volume": None, "VolumeAverage": None,
                 "Beta": None
             })
             continue
 
-        p = prices.get(t, {}) if isinstance(prices.get(t), dict) else {}
-        s = summary.get(t, {}) if isinstance(summary.get(t), dict) else {}
+        # Get price dict safely
+        raw_p = prices.get(t)
+        p = raw_p if isinstance(raw_p, dict) else {}
 
-        # PE fix
-        pe = p.get("trailingPE") or s.get("trailingPE")
-
-        # VolumeAverage fix
-        avg_vol = (
-            p.get("averageDailyVolume10Day")
-            or p.get("averageDailyVolume3Month")
-            or s.get("averageDailyVolume10Day")
-            or s.get("averageDailyVolume3Month")
-        )
+        # Get summary dict safely
+        raw_s = summary.get(t)
+        s = raw_s if isinstance(raw_s, dict) else {}
 
         rows.append(dict(
             Ticker=t,
@@ -221,19 +218,24 @@ def fetch_fast(tickers):
             Last=p.get("regularMarketPreviousClose"),
             Low=p.get("regularMarketDayLow"),
             High=p.get("regularMarketDayHigh"),
-            PE=pe,
+            PE=p.get("trailingPE"),
             Change=p.get("regularMarketChange"),
             ChangePct=p.get("regularMarketChangePercent"),
             Volume=p.get("regularMarketVolume"),
-            VolumeAverage=avg_vol,
+            VolumeAverage=(
+            p.get("averageDailyVolume10Day")
+            or p.get("averageDailyVolume3Month")
+            or p.get("averageDailyVolume")
+            ),
             Beta=s.get("beta")
         ))
 
     return pd.DataFrame(rows)
 
 
+
 # ============================================================
-# MAIN
+# MAIN EXECUTION
 # ============================================================
 
 def main():
@@ -262,12 +264,8 @@ def main():
 
     print("✅ DONE — Saved:", OUTPUT_XLSX)
 
-    # ---- Auto-open ----
-    try:
-        subprocess.Popen(["open", OUTPUT_XLSX])
-    except Exception:
-        pass
-
+    import subprocess
+    subprocess.Popen(["open", DATASOURCE_RAW_XLSX])
 
 # ============================================================
 

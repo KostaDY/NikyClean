@@ -9,7 +9,6 @@ import time
 import random
 import traceback
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import subprocess
 
 # ============================================================
 # CONFIGURATION
@@ -27,9 +26,8 @@ TIMEOUT = 8
 MAX_WORKERS = 6
 RETRY_DELAY = (1.0, 2.0)
 
-
 # ============================================================
-# READ TICKERS (preserve blanks, preserve order)
+# READ TICKERS (preserve blanks)
 # ============================================================
 
 def read_tickers():
@@ -54,7 +52,7 @@ def read_tickers():
 
 
 # ============================================================
-# HTML CALENDAR PAGE SCRAPER (Fallback for Earnings Date)
+# HTML CALENDAR PAGE SCRAPER
 # ============================================================
 
 def get_calendar_page(ticker):
@@ -82,7 +80,7 @@ def extract_earnings_date(soup):
 
 
 # ============================================================
-# EXTENDED ENGINE (MEDY)
+# EXTENDED (MEDY ENGINE)
 # ============================================================
 
 def fetch_extended_once(ticker):
@@ -99,34 +97,20 @@ def fetch_extended_once(ticker):
         price_info = price_info.get(ticker, {}) if isinstance(price_info, dict) else {}
 
         dividend_yield = sd.get("dividendYield")
-        ex_div_raw = sd.get("exDividendDate")
+        ex_div = sd.get("exDividendDate")
         target = fin.get("targetMeanPrice")
         currency = price_info.get("currency", "")
 
-        # ===== Convert Ex-Dividend date =====
-        ex_div = ""
         try:
-            if isinstance(ex_div_raw, (float, int)):
-                ex_div = pd.to_datetime(ex_div_raw, unit="s").strftime("%Y-%m-%d")
+            if isinstance(ex_div, (float, int)):
+                ex_div = pd.to_datetime(ex_div, unit="s").strftime("%Y-%m-%d")
+            else:
+                ex_div = ""
         except Exception:
-            pass
+            ex_div = ""
 
-        # ===== Earnings Date =====
-        earnings_date = ""
-        try:
-            cal = yq.calendar_events
-            earn_raw = cal.get(ticker, {}).get("earningsDate", [])
-            if isinstance(earn_raw, list) and earn_raw:
-                earnings_date = ", ".join(
-                    pd.to_datetime(d, unit="s").strftime("%Y-%m-%d") for d in earn_raw
-                )
-        except Exception:
-            pass
-
-        # HTML fallback
-        if not earnings_date:
-            soup = get_calendar_page(ticker)
-            earnings_date = extract_earnings_date(soup)
+        soup = get_calendar_page(ticker)
+        earnings_date = extract_earnings_date(soup)
 
         return dict(
             Ticker=ticker,
@@ -139,34 +123,29 @@ def fetch_extended_once(ticker):
 
     except Exception:
         return dict(
-            Ticker=ticker,
-            OneYearTarget=None,
-            ExDividendDate="",
-            EarningsDate="",
-            DividendYield=None,
-            Currency=""
+            Ticker=ticker, OneYearTarget=None,
+            ExDividendDate=None, EarningsDate=None,
+            DividendYield=None, Currency=None
         )
 
 
 def fetch_extended(ticker):
     if ticker == "":
         return dict(
-            Ticker="", OneYearTarget=None, ExDividendDate="",
-            EarningsDate="", DividendYield=None, Currency=""
+            Ticker="", OneYearTarget=None, ExDividendDate=None,
+            EarningsDate=None, DividendYield=None, Currency=None
         )
 
     r = fetch_extended_once(ticker)
+    if r["EarningsDate"] or r["ExDividendDate"]:
+        return r
 
-    # If nothing returned, retry
-    if r["EarningsDate"] == "" and r["ExDividendDate"] == "":
-        time.sleep(random.uniform(*RETRY_DELAY))
-        r = fetch_extended_once(ticker)
-
-    return r
+    time.sleep(random.uniform(*RETRY_DELAY))
+    return fetch_extended_once(ticker)
 
 
 # ============================================================
-# FAST ENGINE (YahooQuery)
+# FAST PRICE DATA — FIXED PE + FIXED AVG VOLUME
 # ============================================================
 
 def fetch_fast(tickers):
@@ -186,8 +165,8 @@ def fetch_fast(tickers):
     summary = tq.summary_detail if isinstance(tq.summary_detail, dict) else {}
 
     rows = []
-
     for t in tickers:
+
         if t.strip() == "":
             rows.append({
                 "Ticker": "", "RefreshTime": None,
@@ -202,10 +181,10 @@ def fetch_fast(tickers):
         p = prices.get(t, {}) if isinstance(prices.get(t), dict) else {}
         s = summary.get(t, {}) if isinstance(summary.get(t), dict) else {}
 
-        # PE fix
+        # FIX 1: trailing PE sometimes in summary_detail
         pe = p.get("trailingPE") or s.get("trailingPE")
 
-        # VolumeAverage fix
+        # FIX 2: average volume sometimes in summary_detail
         avg_vol = (
             p.get("averageDailyVolume10Day")
             or p.get("averageDailyVolume3Month")
@@ -261,12 +240,6 @@ def main():
         df.to_excel(writer, index=False, sheet_name=OUTPUT_SHEET)
 
     print("✅ DONE — Saved:", OUTPUT_XLSX)
-
-    # ---- Auto-open ----
-    try:
-        subprocess.Popen(["open", OUTPUT_XLSX])
-    except Exception:
-        pass
 
 
 # ============================================================
