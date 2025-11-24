@@ -1,0 +1,61 @@
+Timestamp,Action,Details
+2025-11-24 19:40:40,start,GUI session started.
+2025-11-24 19:41:49,add,"Added transaction: ['11/24/25', 2, 'AAPL', 150, -222.22, 'add']"
+2025-11-24 19:42:57,add,"Added transaction: ['11/24/25', 3, 'TSLA', 250, -422.22, 'add']"
+2025-11-24 19:43:44,add,"Added transaction: ['11/24/25', 3, 'AAPL', 50, 333.33, 'add']"
+2025-11-24 19:44:17,open,Opened workbook from GUI.
+2025-11-24 19:44:41,exit,Session closed from GUI.
+2025-11-24 21:22:57,add,"Added {'Date': '11/24/25', 'Prefix': '1', 'Ticker': 'AAPL', 'Number': '333.33', 'Price': '255.55', 'Act': 'add'}"
+2025-11-24 21:24:21,add,"Added {'Date': '11/24/25', 'Prefix': '1', 'Ticker': 'AAPL', 'Number': '333.33', 'Price': '255.55', 'Act': 'add'}"
+2025-11-24 21:24:31,add,"Added {'Date': '11/24/25', 'Prefix': '1', 'Ticker': 'AAPL', 'Number': '333.33', 'Price': '255.55', 'Act': 'add'}"
+2025-11-24 21:25:24,add,"Added {'Date': '11/24/25', 'Prefix': '1', 'Ticker': 'ADEA', 'Number': '-13', 'Price': '15.55', 'Act': 'add'}"
+2025-11-24 21:25:33,add,"Added {'Date': '11/24/25', 'Prefix': '1', 'Ticker': 'ADEA', 'Number': '-13', 'Price': '-15.55', 'Act': 'add'}"
+2025-11-24 21:56:00,start,GUI session started.
+2025-11-24 21:58:31,add,"Added transaction: ['12/24/25', 2, 'ASML.AS', 300, 888.888, 'add']"
+2025-11-24 21:58:57,open,Opened workbook from GUI.
+2025-11-24 21:59:47,delete_fail,"No matching transaction for: ['11/24/25', 1, 'AAPL', 3000, 888.0, 'delete']"
+2025-11-24 21:59:59,exit,Session closed from GUI.
+2025-11-24 22:01:14,start,GUI session started.
+2025-11-24 22:02:04,add,"Added transaction: ['11/24/25', 1, 'AET.L', 10000, 45.0, 'add']"
+2025-11-24 22:02:38,open,Opened workbook from GUI.
+2025-11-24 22:02:52,open,Opened workbook from GUI.
+2025-11-24 22:04:07,delete_fail,"No matching transaction for: ['11/24/25', 1, 'AET.L', 10000, 45.0, 'delete']"
+2025-11-24 22:04:27,delete_fail,"No matching transaction for: ['11/24/25', 1, 'AET.L', 10000, 45.0, 'delete']"
+2025-11-24 22:04:55,add,"Added transaction: ['11/24/25', 1, 'AET.L', 10000, 55.0, 'add']"
+2025-11-24 22:05:12,open,Opened workbook from GUI.
+2025-11-24 22:05:58,add,"Added transaction: ['11/24/25', 1, 'AMZN', 1000, -300.0, 'add']"
+2025-11-24 22:06:32,open,Opened workbook from GUI.
+2025-11-24 22:07:40,add,"Added transaction: ['11/24/25', 1, 'BLDP', 12, -13.0, 'add']"
+2025-11-24 22:07:44,open,Opened workbook from GUI.
+2025-11-24 22:38:58,start,GUI session started.
+2025-11-24 22:39:38,add,"Added transaction: ['11/24/25', 1, 'DDD', 5666, -13.33, 'add']"
+2025-11-24 22:40:07,add,"Added transaction: ['11/24/25', 1, 'DDD', 1000, 200.0, 'add']"
+2025-11-24 22:40:39,delete_fail,"No matching transaction for: ['11/24/25', 1, 'DDD', 1000, 200.0, 'delete']"
+2025-11-24 22:40:54,open,Opened workbook from GUI.
+2025-11-24 22:41:59,add,"Added transaction: ['11/24/25', 1, 'DDD', 1, 2.0, 'add']"
+2025-11-24 22:42:25,delete_fail,"No matching transaction for: ['11/24/25', 1, 'DDD', 1, 2.0, 'delete']"
+2025-11-24 22:42:55,delete_fail,"No matching transaction for: ['11/24/25', 1, 'DDD', 1, 2.0, 'delete']"
+2025-11-24 22:53:53,start,GUI session started.
+2025-11-24 22:54:19,add,"Added transaction: ['11/24/25', 1, 'AAPL', 5, 10.0, 'add']"
+2025-11-24 22:54:39,delete,"Deleted: ['11/24/25', 1, 'AAPL', 5, 10.0, 'add']"
+2025-11-24 22:55:08,delete_fail,"Not found: ['11/24/25', 1, 'AAPL', 5, 10.0, 'delete']"
+2025-11-24 22:56:31,delete,"Deleted: ['11/24/25', 1, 'AET.L', 10000, 55, 'add']"
+2025-11-24 23:00:34,start,GUI session started.
+2025-11-24 23:01:00,delete,"Deleted: ['11/24/25', 1, 'BLDP', 12, -13, 'add']"
+2025-11-24 23:01:30,add,"Added transaction: ['11/24/25', 1, 'BLDP', 22, 33.0, 'add']"
+2025-11-24 23:01:35,open,Opened workbook from GUI.
+2025-11-24 23:02:27,exit,Session closed from GUI.
+2025-11-24 23:24:36,start,GUI session started.
+2025-11-24 23:29:55,start,GUI session started.
+2025-11-24 23:31:37,start,GUI session started.
+2025-11-24 23:36:24,start,GUI session started.
+2025-11-24 23:37:38,add,"Added: ('11/24/25', 1, 'ENI.MI', 2000, 15.7, 'add')"
+2025-11-24 23:37:50,open,Opened workbook.
+2025-11-24 23:39:14,delete,"Deleted: ['11/24/25', 1, 'ENI.MI', 2000, 15.7, 'add']"
+2025-11-24 23:45:20,start,GUI session started.
+2025-11-24 23:46:34,add,"Added: (datetime.date(2025, 11, 24), 1, 'ENI.MI', 2000, 15.7, 'add')"
+2025-11-24 23:46:46,open,Opened workbook.
+2025-11-24 23:47:29,delete,"Deleted: [datetime.date(2025, 11, 24), 1, 'ENI.MI', 2000, 15.7, 'add']"
+2025-11-24 23:47:36,open,Opened workbook.
+2025-11-24 23:47:46,open,Opened workbook.
+2025-11-24 23:48:06,exit,GUI session closed.
