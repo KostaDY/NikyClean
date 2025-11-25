@@ -2,462 +2,390 @@
 # -*- coding: utf-8 -*-
 
 import os
-import csv
-from datetime import datetime, date
-import openpyxl
 import tkinter as tk
 from tkinter import ttk, messagebox
-import subprocess
+from openpyxl import load_workbook
 
-# ======================================
+from tableloader import safe_update_table, atomic_save, get_table_info, excel_bounds
+from csv_exporter import export_tabtrans_to_csv
+
+# ============================================================
 # CONFIGURATION
-# ======================================
+# ============================================================
+
+BASE_DIR      = "/Users/kostayanev/NikyClean"
+TRADES_XLSX   = os.path.join(BASE_DIR, "TRADES.xlsx")
+CSV_PATH      = os.path.join(BASE_DIR, "Transactions.csv")
+
+SHEET_NAME    = "Transactions"
+TABLE_NAME    = "TabTrans"
+
+# Data-entry columns (only these are imported from CSV)
+DATA_COLUMNS  = ["Date", "Prefix", "Ticker", "Number", "Price"]
+
+
+# ============================================================
+# EXCEL HELPERS
+# ============================================================
+
+def open_workbook(data_only=False):
+    """Open TRADES.xlsx."""
+    return load_workbook(TRADES_XLSX, data_only=data_only)
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-EXCEL_FILE = os.path.join(BASE_DIR, "TRADES.xlsx")
-LOG_CSV_FILE = os.path.join(BASE_DIR, "TRADES_log.csv")
+
+def load_table_data():
+    """
+    Load TabTrans values for the Treeview.
+    Returns:
+        col_names : list of header names
+        rows      : list of (excel_row, [values...])
+        header_row, min_col, max_col, first_data_row
+    """
+    wb = open_workbook(data_only=True)
+    ws = wb[SHEET_NAME]
+    header_row, min_col, max_col, col_names = get_table_info(ws, TABLE_NAME)
+    (min_row, _), (max_row, _) = excel_bounds(ws.tables[TABLE_NAME].ref)
+
+    rows = []
+    for r in range(header_row + 1, max_row + 1):
+        row_vals = [ws.cell(row=r, column=c).value for c in range(min_col, max_col + 1)]
+        rows.append((r, row_vals))  # include Excel row number
+    return col_names, rows, header_row, min_col, max_col, header_row + 1
+
+
+def append_row_to_table(values_dict):
+    """
+    Append a new row to TabTrans, updating only DATA_COLUMNS.
+    values_dict: {"Date": ..., "Prefix": ..., ...}
+    """
+    wb = open_workbook(data_only=False)
+    ws = wb[SHEET_NAME]
+    table = ws.tables[TABLE_NAME]
+
+    (min_row, min_col), (max_row, max_col) = excel_bounds(table.ref)
+    header_row = min_row
+    next_row = max_row + 1
 
-TRANS_HEADERS = ["Date", "Prefix", "Ticker", "Number", "Price", "Act"]
-LOG_HEADERS = ["Timestamp", "Action", "Details"]
+    # map headers to offsets
+    _, _, _, col_names = get_table_info(ws, TABLE_NAME)
+    col_index = {name: i for i, name in enumerate(col_names)}
 
-TICKER_LIST = []
-TICKER_DISPLAY = []
-last_deleted_entry = None
+    # write data columns
+    for col_name in DATA_COLUMNS:
+        excel_col = min_col + col_index[col_name]
+        ws.cell(row=next_row, column=excel_col).value = values_dict.get(col_name)
+
+    # resize table to include new row
+    from openpyxl.utils import get_column_letter
+    start_cell = f"{get_column_letter(min_col)}{header_row}"
+    end_cell   = f"{get_column_letter(max_col)}{next_row}"
+    table.ref = f"{start_cell}:{end_cell}"
+
+    wb.save(TRADES_XLSX)
+
+
+def update_row_in_table(excel_row, values_dict):
+    """
+    Update an existing row (excel_row) in TabTrans for DATA_COLUMNS only.
+    """
+    wb = open_workbook(data_only=False)
+    ws = wb[SHEET_NAME]
+    table = ws.tables[TABLE_NAME]
+
+    (min_row, min_col), (max_row, max_col) = excel_bounds(table.ref)
+    _, _, _, col_names = get_table_info(ws, TABLE_NAME)
+    col_index = {name: i for i, name in enumerate(col_names)}
+
+    if excel_row <= min_row or excel_row > max_row:
+        raise ValueError("Row out of table bounds")
+
+    for col_name in DATA_COLUMNS:
+        excel_col = min_col + col_index[col_name]
+        ws.cell(row=excel_row, column=excel_col).value = values_dict.get(col_name)
+
+    wb.save(TRADES_XLSX)
+
+
+def delete_row_from_table(excel_row):
+    """
+    Delete a row from TabTrans and shrink the table.
+    """
+    wb = open_workbook(data_only=False)
+    ws = wb[SHEET_NAME]
+    table = ws.tables[TABLE_NAME]
+
+    (min_row, min_col), (max_row, max_col) = excel_bounds(table.ref)
+    if excel_row <= min_row or excel_row > max_row:
+        raise ValueError("Row out of table bounds")
+
+    ws.delete_rows(excel_row, 1)
+
+    # shrink table range
+    from openpyxl.utils import get_column_letter
+    new_max_row = max_row - 1
+    start_cell = f"{get_column_letter(min_col)}{min_row}"
+    end_cell   = f"{get_column_letter(max_col)}{new_max_row}"
+    table.ref = f"{start_cell}:{end_cell}"
+
+    wb.save(TRADES_XLSX)
+
+
+# ============================================================
+# GUI CLASS
+# ============================================================
+
+class TradesGUI:
+    def __init__(self, root):
+        self.root = root
+        root.title("Trades Entry")
+
+        self.selected_excel_row = None   # Excel row index for current selection
+        self.col_names = []              # Table headers
+        self.row_map = {}                # tree item id -> excel_row
+
+        main = ttk.Frame(root, padding=10)
+        main.grid(sticky="nsew")
+        root.rowconfigure(0, weight=1)
+        root.columnconfigure(0, weight=1)
+
+        # ---------- Treeview with TabTrans ----------
+        tree_frame = ttk.Frame(main)
+        tree_frame.grid(row=0, column=0, columnspan=5, sticky="nsew")
+
+        self.tree = ttk.Treeview(tree_frame, show="headings")
+        self.tree.bind("<<TreeviewSelect>>", self.on_tree_select)
+        self.tree.bind("<Double-1>", self.on_open_clicked)  # C: double-click opens
+
+        vsb = ttk.Scrollbar(tree_frame, orient="vertical", command=self.tree.yview)
+        self.tree.configure(yscrollcommand=vsb.set)
+
+        self.tree.grid(row=0, column=0, sticky="nsew")
+        vsb.grid(row=0, column=1, sticky="ns")
+
+        tree_frame.rowconfigure(0, weight=1)
+        tree_frame.columnconfigure(0, weight=1)
+
+        # ---------- Buttons ----------
+        btn_frame = ttk.Frame(main, padding=(0, 5))
+        btn_frame.grid(row=1, column=0, columnspan=5, sticky="w")
+
+        ttk.Button(btn_frame, text="Open",   command=self.on_open_clicked).grid(row=0, column=0, padx=2)
+        ttk.Button(btn_frame, text="Add New",command=self.on_add_new_clicked).grid(row=0, column=1, padx=2)
+        ttk.Button(btn_frame, text="Delete", command=self.on_delete_clicked).grid(row=0, column=2, padx=2)
+        ttk.Button(btn_frame, text="Refresh",command=self.refresh_tree).grid(row=0, column=3, padx=2)
+        ttk.Button(btn_frame, text="Exit",   command=self.on_exit_clicked).grid(row=0, column=4, padx=2)
+
+        # ---------- Entry / Edit form ----------
+        form = ttk.LabelFrame(main, text="Entry / Edit", padding=10)
+        form.grid(row=2, column=0, columnspan=5, sticky="ew", pady=(5, 0))
+
+        ttk.Label(form, text="Date:").grid(  row=0, column=0, sticky="e")
+        ttk.Label(form, text="Prefix:").grid(row=1, column=0, sticky="e")
+        ttk.Label(form, text="Ticker:").grid(row=2, column=0, sticky="e")
+        ttk.Label(form, text="Number:").grid(row=3, column=0, sticky="e")
+        ttk.Label(form, text="Price:").grid( row=4, column=0, sticky="e")
+
+        self.e_date   = ttk.Entry(form, width=12)
+        self.e_prefix = ttk.Entry(form, width=6)
+        self.e_ticker = ttk.Entry(form, width=10)
+        self.e_number = ttk.Entry(form, width=10)
+        self.e_price  = ttk.Entry(form, width=10)
+
+        self.e_date.grid(  row=0, column=1, padx=2, pady=2)
+        self.e_prefix.grid(row=1, column=1, padx=2, pady=2)
+        self.e_ticker.grid(row=2, column=1, padx=2, pady=2)
+        self.e_number.grid(row=3, column=1, padx=2, pady=2)
+        self.e_price.grid( row=4, column=1, padx=2, pady=2)
+
+        ttk.Button(form, text="Save (Add / Update)", command=self.on_save_clicked).grid(
+            row=5, column=0, columnspan=2, pady=(5, 0)
+        )
+
+        main.rowconfigure(0, weight=1)
+
+        # Initial load of table
+        self.refresh_tree()
+
+    # --------------------------------------------------------
+    # Treeview helpers
+    # --------------------------------------------------------
+    def refresh_tree(self):
+        """Reload the Treeview from Excel."""
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+        self.row_map.clear()
+        self.selected_excel_row = None
 
-wb = None
-ws_trans = None
-ws_log = None
-
-
-# ======================================
-# INITIALIZATION
-# ======================================
-
-def init_log_csv():
-    if not os.path.exists(LOG_CSV_FILE):
-        with open(LOG_CSV_FILE, "w", newline="", encoding="utf-8") as f:
-            w = csv.writer(f)
-            w.writerow(LOG_HEADERS)
-
-
-def init_workbook():
-    global wb, ws_trans, ws_log
-
-    if not os.path.exists(EXCEL_FILE):
-        wb2 = openpyxl.Workbook()
-
-        ws_t = wb2.active
-        ws_t.title = "Transactions"
-        for col, h in enumerate(TRANS_HEADERS, start=1):
-            ws_t.cell(row=1, column=col).value = h
-
-        ws_l = wb2.create_sheet("Log")
-        for col, h in enumerate(LOG_HEADERS, start=1):
-            ws_l.cell(row=1, column=col).value = h
-
-        ws_s = wb2.create_sheet("Stock")
-        ws_s.cell(1, 1, "Ticker")
-        ws_s.cell(1, 2, "Description")
-
-        wb2.save(EXCEL_FILE)
-
-    wb = openpyxl.load_workbook(EXCEL_FILE)
-
-    ws_trans = wb["Transactions"]
-    ws_log = wb["Log"]
-
-    wb.save(EXCEL_FILE)
-
-
-def rebuild_log_from_csv():
-    global ws_log, wb
-
-    while ws_log.max_row > 1:
-        ws_log.delete_rows(2)
-
-    if os.path.exists(LOG_CSV_FILE):
-        with open(LOG_CSV_FILE, "r", encoding="utf-8") as f:
-            rdr = csv.reader(f)
-            next(rdr, None)
-            for row in rdr:
-                nr = ws_log.max_row + 1
-                for c, v in enumerate(row, start=1):
-                    ws_log.cell(nr, c).value = v
-
-    wb.save(EXCEL_FILE)
-
-
-# ======================================
-# LOGGING
-# ======================================
-
-def append_log(action, details):
-    ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    row = [ts, action, details]
-
-    with open(LOG_CSV_FILE, "a", newline="", encoding="utf-8") as f:
-        csv.writer(f).writerow(row)
-
-    nr = ws_log.max_row + 1
-    for c, v in enumerate(row, start=1):
-        ws_log.cell(nr, c).value = v
-
-    wb.save(EXCEL_FILE)
-
-
-# ======================================
-# LOAD TICKERS FROM STOCK SHEET
-# ======================================
-
-def load_tickers_from_workbook():
-    tickers = []
-    display = []
-
-    try:
-        wb2 = openpyxl.load_workbook(EXCEL_FILE, data_only=True)
-    except:
-        return [], []
-
-    if "Stock" not in wb2.sheetnames:
-        return [], []
-
-    ws_s = wb2["Stock"]
-
-    # CASE 1 — Named range exists
-    if "Tickers" in wb2.defined_names:
-        dn = wb2.defined_names["Tickers"]
-        for sheetname, cell_ref in dn.destinations:
-            ws2 = wb2[sheetname]
-            rng = ws2[cell_ref]
-            for row in rng:
-                cell = row[0]
-                if cell.value:
-                    t = str(cell.value).strip().upper()
-                    desc = ws2.cell(row=cell.row, column=cell.col_idx+1).value
-                    desc = str(desc).strip() if desc else ""
-                    tickers.append(t)
-                    display.append(f"{t} – {desc}" if desc else t)
-    else:
-        # CASE 2 — Column A+B
-        for r in ws_s.iter_rows(min_row=2, max_col=2):
-            if r[0].value:
-                t = str(r[0].value).strip().upper()
-                desc = r[1].value
-                desc = str(desc).strip() if desc else ""
-                tickers.append(t)
-                display.append(f"{t} – {desc}" if desc else t)
-
-    final = list(dict.fromkeys(zip(tickers, display)))
-    return [f[0] for f in final], [f[1] for f in final]
-
-
-# ======================================
-# VALIDATION
-# ======================================
-
-def validate_entry(datestr, prefixstr, ticker, numberstr, pricestr, act):
-    # date
-    datetime.strptime(datestr, "%m/%d/%y")
-
-    # prefix
-    if not prefixstr.isdigit():
-        raise ValueError("Prefix must be integer.")
-    px = int(prefixstr)
-    if not (1 <= px <= 9):
-        raise ValueError("Prefix must be between 1 and 9.")
-
-    # ticker
-    tick = ticker.strip().upper()
-    if TICKER_LIST and tick not in TICKER_LIST:
-        raise ValueError(f"Ticker must be one of: {', '.join(TICKER_LIST)}")
-
-    # number
-    if not numberstr.isdigit():
-        raise ValueError("Number must be positive integer.")
-    num = int(numberstr)
-    if num <= 0:
-        raise ValueError("Number must be > 0.")
-
-    # price
-    try:
-        price = float(pricestr)
-    except:
-        raise ValueError("Price must be numeric.")
-
-    act_clean = act.lower().strip() or "add"
-    if act_clean not in ["add", "delete", "open", "exit"]:
-        raise ValueError("Act must be add/delete/open/exit.")
-
-    # Confirmation ONLY for ADD
-    if act_clean == "add":
-        if price < 0:
-            if not messagebox.askyesno("Confirm Purchase",
-                                       f"Price = {price}. Confirm PURCHASE?"):
-                raise ValueError("Cancelled.")
-        elif price > 0:
-            if not messagebox.askyesno("Confirm Sale",
-                                       f"Price = {price}. Confirm SALE?"):
-                raise ValueError("Cancelled.")
-
-    excel_date = datetime.strptime(datestr, "%m/%d/%y").date()
-    return excel_date, px, tick, num, price, act_clean
-
-
-# ======================================
-# APPEND TRANSACTION
-# ======================================
-
-def append_transaction(entry):
-    nr = ws_trans.max_row + 1
-    for c, v in enumerate(entry, start=1):
-        ws_trans.cell(nr, c).value = v
-    wb.save(EXCEL_FILE)
-    append_log("add", f"Added: {entry}")
-
-
-# ======================================
-# SAFE DELETE
-# ======================================
-
-def delete_matching_transaction(entry):
-    global last_deleted_entry
-
-    date_s, prefix_i, ticker_s, number_i, price_f, _ = entry
-    max_row = ws_trans.max_row
-
-    target = None
-    for r in range(2, max_row + 1):
-        vals = [
-            ws_trans.cell(r, 1).value,
-            ws_trans.cell(r, 2).value,
-            ws_trans.cell(r, 3).value,
-            ws_trans.cell(r, 4).value,
-            ws_trans.cell(r, 5).value
-        ]
-        if vals == [date_s, prefix_i, ticker_s, number_i, price_f]:
-            target = r
-            break
-
-    if not target:
-        messagebox.showwarning("Not found", "No matching transaction found.")
-        append_log("delete_fail", f"No match for {entry}")
-        return False
-
-    saved_row = [ws_trans.cell(target, c).value for c in range(1, 7)]
-    last_deleted_entry = (saved_row, target)
-
-    last_used = max_row
-    while last_used > 1:
-        if any(ws_trans.cell(last_used, c).value not in ("", None)
-               for c in range(1, 7)):
-            break
-        last_used -= 1
-
-    for r in range(target, last_used):
-        for c in range(1, 7):
-            ws_trans.cell(r, c).value = ws_trans.cell(r + 1, c).value
-
-    for c in range(1, 7):
-        ws_trans.cell(last_used, c).value = None
-
-    wb.save(EXCEL_FILE)
-    append_log("delete", f"Deleted: {saved_row}")
-    messagebox.showinfo("Deleted", "Transaction deleted.")
-    return True
-
-
-# ======================================
-# UNDO DELETE
-# ======================================
-
-def undo_last_delete():
-    global last_deleted_entry
-
-    if not last_deleted_entry:
-        messagebox.showinfo("Undo", "Nothing to undo.")
-        return
-
-    values, _ = last_deleted_entry
-    append_transaction(values)
-    append_log("undo_delete", f"Restored: {values}")
-    last_deleted_entry = None
-    messagebox.showinfo("Undo", "Last deleted transaction restored.")
-
-
-# ======================================
-# OPEN WORKBOOK
-# ======================================
-
-def open_workbook():
-    append_log("open", "Opened workbook.")
-    if os.name == "posix":
-        subprocess.call(["open", EXCEL_FILE])
-    else:
-        os.startfile(EXCEL_FILE)
-
-
-# ======================================
-# GUI
-# ======================================
-
-def build_gui():
-    global TICKER_LIST, TICKER_DISPLAY
-
-    root = tk.Tk()
-    root.title("TRADES – Transactions Manager")
-
-    frm = ttk.Frame(root, padding=10)
-    frm.grid(row=0, column=0, sticky="nsew")
-
-    date_var = tk.StringVar(value=date.today().strftime("%m/%d/%y"))
-    prefix_var = tk.StringVar(value="1")
-    ticker_var = tk.StringVar()
-    number_var = tk.StringVar()
-    price_var = tk.StringVar()
-    act_var = tk.StringVar(value="add")
-
-    TICKER_LIST, TICKER_DISPLAY = load_tickers_from_workbook()
-    if TICKER_LIST:
-        ticker_var.set(TICKER_LIST[0])
-
-    # --- Date
-    ttk.Label(frm, text="Date (mm/dd/yy):").grid(row=0, column=0, sticky="w")
-    ttk.Entry(frm, textvariable=date_var, width=15).grid(row=0, column=1)
-
-    # --- Prefix
-    ttk.Label(frm, text="Prefix (1–9):").grid(row=1, column=0, sticky="w")
-    ttk.Combobox(frm, textvariable=prefix_var,
-                 values=[str(i) for i in range(1, 10)],
-                 width=5, state="readonly").grid(row=1, column=1)
-
-    # --- Ticker
-    ttk.Label(frm, text="Ticker:").grid(row=2, column=0, sticky="w")
-
-    ticker_cb = ttk.Combobox(
-        frm, textvariable=ticker_var, width=30,
-        values=TICKER_DISPLAY, state="readonly"
-    )
-    ticker_cb.grid(row=2, column=1)
-
-    def on_ticker_select(e):
-        val = ticker_var.get()
-        ticker_var.set(val.split("–")[0].strip())
-
-    ticker_cb.bind("<<ComboboxSelected>>", on_ticker_select)
-
-    def reload_tickers():
-        global TICKER_LIST, TICKER_DISPLAY
-        TICKER_LIST, TICKER_DISPLAY = load_tickers_from_workbook()
-        ticker_cb["values"] = TICKER_DISPLAY
-        if TICKER_LIST:
-            ticker_var.set(TICKER_LIST[0])
-
-    ttk.Button(frm, text="Reload Tickers", command=reload_tickers)\
-        .grid(row=2, column=2, padx=5)
-
-    # --- Number
-    ttk.Label(frm, text="Number:").grid(row=3, column=0, sticky="w")
-    ttk.Entry(frm, textvariable=number_var, width=15).grid(row=3, column=1)
-
-    # --- Price
-    ttk.Label(frm, text="Price:").grid(row=4, column=0, sticky="w")
-    ttk.Entry(frm, textvariable=price_var, width=15).grid(row=4, column=1)
-
-    # --- Act
-    ttk.Label(frm, text="Act:").grid(row=5, column=0, sticky="w")
-    ttk.Combobox(frm, textvariable=act_var,
-                 values=["add", "delete", "open", "exit"],
-                 width=10, state="readonly").grid(row=5, column=1)
-
-    # Clear input (after add/delete)
-    def clear_fields():
-        date_var.set(date.today().strftime("%m/%d/%y"))
-        prefix_var.set("1")
-        number_var.set("")
-        price_var.set("")
-        act_var.set("add")
-
-    # Run main action
-    def run_action():
         try:
-            entry = validate_entry(
-                date_var.get(),
-                prefix_var.get(),
-                ticker_var.get(),
-                number_var.get(),
-                price_var.get(),
-                act_var.get()
-            )
-        except ValueError as e:
-            messagebox.showerror("Validation", str(e))
+            col_names, rows, header_row, min_col, max_col, first_data_row = load_table_data()
+        except Exception as e:
+            messagebox.showerror("Error", f"Cannot load Excel table:\n{e}")
             return
 
-        act = entry[-1]
+        self.col_names = col_names
+        self.tree["columns"] = col_names
+        for name in col_names:
+            self.tree.heading(name, text=name)
+            self.tree.column(name, width=90, anchor="center")
 
-        if act == "open":
-            open_workbook()
+        for excel_row, vals in rows:
+            item_id = self.tree.insert("", "end", values=vals)
+            self.row_map[item_id] = excel_row
+
+    def on_tree_select(self, event=None):
+        sel = self.tree.selection()
+        if not sel:
+            self.selected_excel_row = None
+            return
+        item_id = sel[0]
+        self.selected_excel_row = self.row_map.get(item_id)
+
+    # --------------------------------------------------------
+    # Button handlers
+    # --------------------------------------------------------
+    def on_open_clicked(self, event=None):
+        """Open selected row into the entry form."""
+        sel = self.tree.selection()
+        if not sel:
+            messagebox.showinfo("Info", "Please select a row in the table.")
+            return
+        item_id = sel[0]
+        excel_row = self.row_map.get(item_id)
+        if excel_row is None:
             return
 
-        if act == "exit":
-            append_log("exit", "GUI session closed.")
-            root.destroy()
+        vals = self.tree.item(item_id, "values")
+        col_idx = {name: i for i, name in enumerate(self.col_names)}
+
+        def get_val(col):
+            idx = col_idx.get(col)
+            return vals[idx] if idx is not None and idx < len(vals) else ""
+
+        # populate form
+        self.e_date.delete(0, tk.END)
+        self.e_prefix.delete(0, tk.END)
+        self.e_ticker.delete(0, tk.END)
+        self.e_number.delete(0, tk.END)
+        self.e_price.delete(0, tk.END)
+
+        self.e_date.insert(0,   get_val("Date"))
+        self.e_prefix.insert(0, get_val("Prefix"))
+        self.e_ticker.insert(0, get_val("Ticker"))
+        self.e_number.insert(0, get_val("Number"))
+        self.e_price.insert(0,  get_val("Price"))
+
+        self.selected_excel_row = excel_row
+
+    def on_add_new_clicked(self):
+        """Prepare form for a new row."""
+        self.selected_excel_row = None
+        self.e_date.delete(0, tk.END)
+        self.e_prefix.delete(0, tk.END)
+        self.e_ticker.delete(0, tk.END)
+        self.e_number.delete(0, tk.END)
+        self.e_price.delete(0, tk.END)
+
+    def on_delete_clicked(self):
+        """Delete selected row (with confirmation)."""
+        sel = self.tree.selection()
+        if not sel:
+            messagebox.showinfo("Info", "Please select a row to delete.")
+            return
+        item_id = sel[0]
+        excel_row = self.row_map.get(item_id)
+        if excel_row is None:
             return
 
-        if act == "delete":
-            if delete_matching_transaction(entry):
-                clear_fields()
+        ans = messagebox.askyesno("Confirm Delete", "Delete selected transaction?")
+        if not ans:
             return
 
-        if act == "add":
-            append_transaction(entry)
-            messagebox.showinfo("Added", "Transaction added.")
-            clear_fields()
+        try:
+            delete_row_from_table(excel_row)
+            self.refresh_tree()
+        except Exception as e:
+            messagebox.showerror("Error", f"Could not delete row:\n{e}")
+
+    def on_save_clicked(self):
+        """Add or update a transaction (with basic validation)."""
+        date   = self.e_date.get().strip()
+        prefix = self.e_prefix.get().strip()
+        ticker = self.e_ticker.get().strip()
+        number = self.e_number.get().strip()
+        price  = self.e_price.get().strip()
+
+        # basic validation
+        if not ticker:
+            messagebox.showerror("Validation", "Ticker is required.")
+            return
+        if not date:
+            messagebox.showerror("Validation", "Date is required.")
             return
 
-    # ============ BUTTON BAR ============
+        try:
+            num_val = float(number)
+        except Exception:
+            messagebox.showerror("Validation", "Number must be numeric.")
+            return
+        try:
+            price_val = float(price)
+        except Exception:
+            messagebox.showerror("Validation", "Price must be numeric.")
+            return
 
-    btn = ttk.Frame(frm)
-    btn.grid(row=6, column=0, columnspan=3, pady=10)
+        values = {
+            "Date":   date,
+            "Prefix": prefix,
+            "Ticker": ticker,
+            "Number": num_val,
+            "Price":  price_val,
+        }
 
-    ttk.Button(btn, text="Add",
-               command=lambda: [act_var.set("add"), run_action()]
-               ).grid(row=0, column=0, padx=5)
+        try:
+            if self.selected_excel_row is None:
+                append_row_to_table(values)
+            else:
+                update_row_in_table(self.selected_excel_row, values)
+            self.refresh_tree()
+            messagebox.showinfo("OK", "Transaction saved.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Could not save transaction:\n{e}")
 
-    ttk.Button(btn, text="Delete",
-               command=lambda: [act_var.set("delete"), run_action()]
-               ).grid(row=0, column=1, padx=5)
-
-    ttk.Button(btn, text="Open WB",
-               command=open_workbook
-               ).grid(row=0, column=2, padx=5)
-
-    ttk.Button(btn, text="Undo Delete",
-               command=undo_last_delete
-               ).grid(row=0, column=3, padx=5)
-
-    ttk.Button(btn, text="Exit",
-               command=lambda: [
-                   append_log("exit", "GUI session closed."),
-                   root.destroy()
-               ]
-               ).grid(row=0, column=4, padx=5)
-
-    return root
+    def on_exit_clicked(self):
+        """Export entire TabTrans to CSV, then close GUI."""
+        try:
+            export_tabtrans_to_csv()
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to export CSV:\n{e}")
+        self.root.destroy()
 
 
-# ======================================
-# MAIN
-# ======================================
+# ============================================================
+# INITIALIZE FROM CSV, THEN RUN GUI
+# ============================================================
+
+def initialize_tabtrans_from_csv():
+    """
+    At GUI start:
+    - If Transactions.csv exists: import its data columns into TabTrans.
+    - Formula columns remain untouched.
+    """
+    if not os.path.exists(CSV_PATH):
+        print("⚠ Transactions.csv does not exist — starting from current Excel.")
+        return
+    try:
+        wb = safe_update_table(CSV_PATH, TRADES_XLSX, SHEET_NAME, TABLE_NAME, DATA_COLUMNS)
+        atomic_save(wb, TRADES_XLSX)
+        print("✔ TRADES.xlsx updated from CSV (data columns only).")
+    except Exception as e:
+        print("✖ Failed to update Excel from CSV:", e)
+
 
 def main():
-    init_log_csv()
-    init_workbook()
-    rebuild_log_from_csv()
-    append_log("start", "GUI session started.")
-
-    root = build_gui()
+    initialize_tabtrans_from_csv()
+    root = tk.Tk()
+    TradesGUI(root)
     root.mainloop()
-    wb.save(EXCEL_FILE)
 
 
 if __name__ == "__main__":
