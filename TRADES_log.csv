@@ -59,3 +59,72 @@ Timestamp,Action,Details
 2025-11-24 23:47:36,open,Opened workbook.
 2025-11-24 23:47:46,open,Opened workbook.
 2025-11-24 23:48:06,exit,GUI session closed.
+2025-11-26 00:49:54,start,GUI session started.
+2025-11-26 00:51:20,add,"Added: [datetime.date(2025, 11, 26), 1, 'AAPL', 5, 5.5, 'add']"
+2025-11-26 00:51:38,delete,"Deleted: [datetime.date(2025, 11, 26), 1, 'AAPL', 5, 5.5, 'add']"
+2025-11-26 00:51:42,add,"Added: [datetime.date(2025, 11, 26), 1, 'AAPL', 5, 5.5, 'add']"
+2025-11-26 00:51:42,undo_delete,"Restored: [datetime.date(2025, 11, 26), 1, 'AAPL', 5, 5.5, 'add']"
+2025-11-26 00:51:47,open,Opened workbook from GUI.
+2025-11-26 01:09:27,open,Opened workbook from GUI.
+2025-11-26 01:29:46,exit,GUI session closed via Exit button.
+2025-11-26 01:30:00,start,GUI session started.
+2025-11-26 01:30:08,open,Opened workbook from GUI.
+2025-11-26 01:30:19,open,Opened workbook from GUI.
+2025-11-26 01:32:06,open,Opened workbook from GUI.
+2025-11-26 01:37:54,open,Opened workbook from GUI.
+2025-11-26 01:39:43,open,Opened workbook from GUI.
+2025-11-26 01:39:53,exit,GUI session closed via Exit button.
+2025-11-26 01:48:12,start,GUI session started.
+2025-11-26 01:48:22,open,Opened workbook from GUI.
+2025-11-26 01:48:41,exit,GUI session closed via Exit button.
+2025-11-26 01:52:36,start,GUI session started.
+2025-11-26 01:52:45,open,Opened workbook from GUI.
+2025-11-26 01:53:10,exit,GUI session closed via Exit button.
+2025-11-26 01:53:41,start,GUI session started.
+2025-11-26 01:53:49,open,Opened workbook from GUI.
+2025-11-26 01:55:42,exit,GUI session closed via Exit button.
+2025-11-26 02:05:52,start,GUI session started.
+2025-11-26 02:06:03,open,Opened workbook from GUI.
+2025-11-26 02:07:21,start,GUI session started.
+2025-11-26 02:07:29,open,Opened workbook from GUI.
+2025-11-26 02:07:56,exit,GUI session closed via Exit button.
+2025-11-26 02:08:53,start,GUI session started.
+2025-11-26 02:09:06,open,Opened workbook from GUI.
+2025-11-26 02:09:30,add,"Added: [datetime.date(2025, 11, 26), 1, 'AAPL', 2, 2.0, 'add']"
+2025-11-26 02:10:00,open,Opened workbook from GUI.
+2025-11-26 02:10:31,open,Opened workbook from GUI.
+2025-11-26 02:10:55,open,Opened workbook from GUI.
+2025-11-26 02:11:54,add,"Added: [datetime.date(2025, 11, 26), 2, 'RIGL', 500, 48.28, 'add']"
+2025-11-26 02:12:05,exit,GUI session closed via Exit button.
+2025-11-26 02:13:03,start,GUI session started.
+2025-11-26 02:13:35,add,"Added: [datetime.date(2025, 11, 26), 1, 'RIGL', 500, 48.28, 'add']"
+2025-11-26 02:13:58,exit,GUI session closed via Exit button.
+2025-11-26 02:14:35,start,GUI session started.
+2025-11-26 02:14:40,open,Opened workbook from GUI.
+2025-11-26 02:15:26,add,"Added: [datetime.date(2025, 11, 26), 1, 'RIGL', 500, 48.28, 'add']"
+2025-11-26 02:16:39,add,"Added: [datetime.date(2025, 11, 26), 1, 'RIGL', 500, 48.28, 'add']"
+2025-11-26 02:16:45,exit,GUI session closed via Exit button.
+2025-11-26 02:17:19,start,GUI session started.
+2025-11-26 02:17:28,open,Opened workbook from GUI.
+2025-11-26 02:17:47,exit,GUI session closed via Exit button.
+2025-11-26 02:35:59,start,GUI session started.
+2025-11-26 02:37:18,debug,"append_transaction: row=1284, entry=[datetime.date(2025, 11, 26), 1, 'RIGL', 500, 48.28, 'add']"
+2025-11-26 02:37:18,add,"Added: [datetime.date(2025, 11, 26), 1, 'RIGL', 500, 48.28, 'add']"
+2025-11-26 02:37:31,open,Opened workbook from GUI.
+2025-11-26 02:37:56,exit,GUI session closed via Exit button.
+2025-11-26 02:39:36,start,GUI session started.
+2025-11-26 02:39:43,open,Opened workbook from GUI.
+2025-11-26 02:39:56,exit,GUI session closed via Exit button.
+2025-11-26 02:46:29,start,GUI session started.
+2025-11-26 02:47:02,debug,"append_transaction: row=1285, entry=[datetime.date(2025, 11, 26), 1, 'RIGL', 500, 48.28, 'add']"
+2025-11-26 02:47:02,add,"Added: [datetime.date(2025, 11, 26), 1, 'RIGL', 500, 48.28, 'add']"
+2025-11-26 02:47:23,exit,GUI session closed via Exit button.
+2025-11-26 03:15:28,start,GUI session started.
+2025-11-26 03:16:14,debug,"append_transaction: row=1286, entry=[datetime.date(2025, 11, 26), 1, 'RIGL', 500, 48.28, 'add']"
+2025-11-26 03:16:14,add,"Added: [datetime.date(2025, 11, 26), 1, 'RIGL', 500, 48.28, 'add']"
+2025-11-26 03:16:26,exit,GUI session closed via Exit button.
+2025-11-26 03:16:54,start,GUI session started.
+2025-11-26 03:17:13,open,Opened workbook from GUI.
+2025-11-26 03:17:32,exit,GUI session closed via Exit button.
+2025-11-26 03:35:14,start,GUI session started.
+2025-11-26 03:35:41,start,GUI session started.
