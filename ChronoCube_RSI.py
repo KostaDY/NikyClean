@@ -16,14 +16,13 @@ from openpyxl.utils.cell import range_boundaries
 # CONFIG
 # ==========================================================
 
-WORKBOOK = Path("Entry_CorrectHistory.xlsm")
+WORKBOOK = Path("Entry_RSI.xlsm")
 SHEET_NAME = "Calc"
 TABLE_NAME = "TabCalc"
 
-CSV_FILE = Path("ChronoCube.csv")
+CSV_FILE = Path("ChronoCube_RSI.csv")
 META_FILE = Path("ChronoCube_meta.json")
-
-EXCEL_FILE = Path("ChronoLines.xlsx")
+EXCEL_FILE = Path("ChronoLines_RSI.xlsx")
 
 MAX_SLOTS = 16
 
@@ -45,7 +44,7 @@ def recalc_excel():
 
 
 # ==========================================================
-# NORMALIZE VALUES
+# NORMALIZE
 # ==========================================================
 
 def normalize(v):
@@ -55,9 +54,9 @@ def normalize(v):
 
     if isinstance(v,str):
 
-        s = v.strip()
+        s=v.strip()
 
-        if s == "":
+        if s=="":
             return np.nan
 
         if s.startswith("#"):
@@ -83,14 +82,14 @@ def normalize(v):
 
 def read_tabcalc():
 
-    wb = load_workbook(WORKBOOK,data_only=True)
-    ws = wb[SHEET_NAME]
+    wb=load_workbook(WORKBOOK,data_only=True)
+    ws=wb[SHEET_NAME]
 
-    ref = ws.tables[TABLE_NAME].ref
+    ref=ws.tables[TABLE_NAME].ref
 
-    min_col,min_row,max_col,max_row = range_boundaries(ref)
+    min_col,min_row,max_col,max_row=range_boundaries(ref)
 
-    headers = [
+    headers=[
         str(ws.cell(row=min_row,column=c).value)
         for c in range(min_col,max_col+1)
     ]
@@ -110,7 +109,6 @@ def read_tabcalc():
 
     df=pd.DataFrame(rows,columns=headers)
 
-    # remove totals row if present
     if df.iloc[-1].astype(str).str.contains("Total",case=False,na=False).any():
         df=df.iloc[:-1]
 
@@ -130,9 +128,7 @@ def load_meta():
 
         return meta["slot"],meta["dates"]
 
-    else:
-
-        return 0,[""]*MAX_SLOTS
+    return 0,[""]*MAX_SLOTS
 
 
 # ==========================================================
@@ -141,29 +137,24 @@ def load_meta():
 
 def save_meta(slot,dates):
 
-    meta={
-        "slot":slot,
-        "dates":dates
-    }
+    meta={"slot":slot,"dates":dates}
 
     with open(META_FILE,"w") as f:
         json.dump(meta,f,indent=2)
 
 
 # ==========================================================
-# LOAD OR CREATE CSV CUBE
+# LOAD / CREATE CUBE
 # ==========================================================
 
-def load_cube(n_param, n_row):
+def load_cube(n_param,n_row):
 
     if not CSV_FILE.exists():
         return np.full((n_param,n_row,MAX_SLOTS),np.nan,dtype=object)
 
     df=pd.read_csv(CSV_FILE)
 
-    expected_cols=2+MAX_SLOTS
-
-    if df.shape[1]!=expected_cols:
+    if df.shape[1]!=2+MAX_SLOTS:
         print("CSV structure mismatch → rebuilding cube")
         return np.full((n_param,n_row,MAX_SLOTS),np.nan,dtype=object)
 
@@ -179,7 +170,7 @@ def load_cube(n_param, n_row):
 
 
 # ==========================================================
-# SAVE CSV CUBE
+# SAVE CSV
 # ==========================================================
 
 def save_cube_csv(cube,params,rows):
@@ -192,7 +183,6 @@ def save_cube_csv(cube,params,rows):
         for r in range(n_row):
 
             rec=[params[p],rows[r]]
-
             rec.extend(cube[p,r,:])
 
             records.append(rec)
@@ -205,52 +195,45 @@ def save_cube_csv(cube,params,rows):
 
 
 # ==========================================================
-# EXPORT XLSX
+# EXPORT XLSX (BLOCK PER PARAMETER)
 # ==========================================================
 
-def export_excel(cube,params,rows,dates,slot,df):
-
-    n_param,n_row,n_slot=cube.shape
-
-    # chronological reorder
+def export_excel(cube,params,rows,dates,slot):
 
     if slot==0:
-
         chrono_cube=cube
         chrono_dates=dates
-
     else:
-
-        chrono_cube=np.concatenate(
-            (cube[:,:,slot:],cube[:,:,:slot]),
-            axis=2
-        )
-
+        chrono_cube=np.concatenate((cube[:,:,slot:],cube[:,:,:slot]),axis=2)
         chrono_dates=dates[slot:]+dates[:slot]
 
-    records=[]
+    writer=pd.ExcelWriter(EXCEL_FILE,engine="openpyxl")
 
-    for p in range(n_param):
-        for r in range(n_row):
+    start_row=0
 
-            rec=[params[p],rows[r]]
+    for p,param in enumerate(params):
 
-            rec.extend(chrono_cube[p,r,:])
+        block=pd.DataFrame(
+            chrono_cube[p,:,:].T,
+            columns=[f"T{r}" for r in rows]
+        ).T
 
-            records.append(rec)
+        block.columns=chrono_dates
+        block.insert(0,"Ticker",rows)
 
-    columns=["Parameter","Row"]+chrono_dates
+        title=pd.DataFrame([[f"Parameter: {param}"]])
 
-    df_cube=pd.DataFrame(records,columns=columns)
+        title.to_excel(writer,startrow=start_row,index=False,header=False)
 
-    df_snapshot=df.copy()
-    df_snapshot.insert(0,"Row",rows)
+        start_row+=1
 
-    with pd.ExcelWriter(EXCEL_FILE,engine="openpyxl") as writer:
+        block.to_excel(writer,startrow=start_row,index=False)
 
-        df_cube.to_excel(writer,sheet_name="CubeChronological",index=False)
+        start_row+=len(block)+3
 
-        df_snapshot.to_excel(writer,sheet_name="TickerSnapshot",index=False)
+    writer.close()
+
+    subprocess.run(["open",EXCEL_FILE])
 
 
 # ==========================================================
@@ -293,10 +276,9 @@ def main():
 
     save_meta(slot,dates)
 
-    export_excel(cube,params,rows,dates,slot,df)
-    subprocess.run(["open", EXCEL_FILE])
-    print()
-    print("CSV cube updated")
+    export_excel(cube,params,rows,dates,slot)
+
+    print("\nCube updated")
     print("Cube shape:",cube.shape)
     print("Excel file written:",EXCEL_FILE)
 
