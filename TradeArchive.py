@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 # SETTINGS
 # ============================================================
 
-WORKBOOK = Path("Solid_REG_ALL.xlsm")
+WORKBOOK = Path("Entry_RSI.xlsm")
 WORKSHEET = "Entries"
 NAMED_RANGE = "TradeArchive"
 OUTPUT_CSV = Path("TradeArchive.csv")
