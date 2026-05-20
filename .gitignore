@@ -8,3 +8,18 @@ SSE_Scaffold_Files.xlsx
 myenv/
 SSE_Scaffold_Files
 SSE_Scaffold_Files/
+*.xlsx
+*.xlsm
+*.npz
+ChronoCube.csv
+ChronoLines.xlsx
+YahooDataOutput.xlsx
+# Large / generated Excel and data files kept locally only
+*.xlsx
+*.xlsm
+*.npz
+*.csv
+
+# Excel temporary lock files
+~$*.xlsx
+~$*.xlsm
