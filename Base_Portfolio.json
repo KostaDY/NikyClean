@@ -1,0 +1,848 @@
+[
+    {
+        "Name": "APPLE INC.",
+        "Nick": "AAPL",
+        "Ticker": "AAPL",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "ADEIA INC.",
+        "Nick": "ADEA",
+        "Ticker": "ADEA",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "AFENTRA PLC",
+        "Nick": "AET",
+        "Ticker": "AET.L",
+        "CCY": "GBp",
+        "Status": "active",
+        "Scale": 0.01,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "AMAZON.COM, INC.",
+        "Nick": "AMZN",
+        "Ticker": "AMZN",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Dont Nod Entertainment SA",
+        "Nick": "ALDNE",
+        "Ticker": "ALDNE.PA",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "ASML Holding NV",
+        "Nick": "ASML",
+        "Ticker": "ASML.AS",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "BROADCOM INC.",
+        "Nick": "AVGO",
+        "Ticker": "AVGO",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "ASTRAZENECA PLC",
+        "Nick": "AZN",
+        "Ticker": "AZN",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "BALLARD POWER SYSTEMS INC.",
+        "Nick": "BLDP",
+        "Ticker": "BLDP",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "BIOMERICA, INC.",
+        "Nick": "BMRA",
+        "Ticker": "BMRA",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "CITIGROUP INC.",
+        "Nick": "C",
+        "Ticker": "C",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "CISCO SYSTEMS, INC.",
+        "Nick": "CSCO",
+        "Ticker": "CSCO",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "CVS HEALTH CORPORATION",
+        "Nick": "CVS",
+        "Ticker": "CVS",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "3D SYSTEMS CORPORATION",
+        "Nick": "DDD",
+        "Ticker": "DDD",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "THE WALT DISNEY COMPANY",
+        "Nick": "DIS",
+        "Ticker": "DIS",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Dassault Systemes SE",
+        "Nick": "DSY",
+        "Ticker": "DSY.PA",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "DAVITA INC.",
+        "Nick": "DVA",
+        "Ticker": "DVA",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "DXC TECHNOLOGY COMPANY",
+        "Nick": "DXC",
+        "Ticker": "DXC",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "E.ON SE",
+        "Nick": "EOAN",
+        "Ticker": "EOAN.DE",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "EASYJET PLC",
+        "Nick": "EZJ",
+        "Ticker": "EZJ.L",
+        "CCY": "GBp",
+        "Status": "active",
+        "Scale": 0.01,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "GENERAL MOTORS COMPANY",
+        "Nick": "GM",
+        "Ticker": "GM",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "HEWLETT PACKARD ENTERPRISE COMPANY",
+        "Nick": "HPE",
+        "Ticker": "HPE",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "HP INC.",
+        "Nick": "HPQ",
+        "Ticker": "HPQ",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "International Consolidated Airlines Group SA",
+        "Nick": "IAG",
+        "Ticker": "IAG.L",
+        "CCY": "GBp",
+        "Status": "active",
+        "Scale": 0.01,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "THE KROGER CO.",
+        "Nick": "KR",
+        "Ticker": "KR",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "LENSAR, INC.",
+        "Nick": "LNSR",
+        "Ticker": "LNSR",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "LUMEN TECHNOLOGIES, INC.",
+        "Nick": "LUMN",
+        "Ticker": "LUMN",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "MODERNA, INC.",
+        "Nick": "MRNA",
+        "Ticker": "MRNA",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "MICROSOFT CORPORATION",
+        "Nick": "MSFT",
+        "Ticker": "MSFT",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "NEXTERA ENERGY, INC.",
+        "Nick": "NEE",
+        "Ticker": "NEE",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "NEWMONT CORPORATION",
+        "Nick": "NEM",
+        "Ticker": "NEM",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "NETFLIX, INC.",
+        "Nick": "NFLX",
+        "Ticker": "NFLX",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "FISCALNOTE HOLDINGS, INC.",
+        "Nick": "NOTE",
+        "Ticker": "NOTE",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Pan American Silver Corp.",
+        "Nick": "PAAS",
+        "Ticker": "PAAS",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Profound Medical Corp.",
+        "Nick": "PROF",
+        "Ticker": "PROF",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "POET Technologies Inc.",
+        "Nick": "POET",
+        "Ticker": "POET",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "POWER REIT",
+        "Nick": "PW",
+        "Ticker": "PW",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "RIGEL PHARMACEUTICALS, INC.",
+        "Nick": "RIGL",
+        "Ticker": "RIGL",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "RWE AG",
+        "Nick": "RWE",
+        "Ticker": "RWE.DE",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "SAP SE",
+        "Nick": "SAP",
+        "Ticker": "SAP.DE",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Shin-Etsu Chemical Co., Ltd.",
+        "Nick": "SHECY",
+        "Ticker": "SHECY",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "STRATASYS LTD",
+        "Nick": "SSYS",
+        "Ticker": "SSYS",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "TESLA, INC.",
+        "Nick": "TSLA",
+        "Ticker": "TSLA",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Taiwan Semiconductor Manufacturing Company Limited",
+        "Nick": "TSM",
+        "Ticker": "TSM",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Uniper SE",
+        "Nick": "UN0",
+        "Ticker": "UN0.DE",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "UNITI GROUP INC.",
+        "Nick": "UNIT",
+        "Ticker": "UNIT",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Volvo AB",
+        "Nick": "VLVLY",
+        "Ticker": "VLVLY",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Vontobel Holding Ltd",
+        "Nick": "VONN",
+        "Ticker": "VONN.SW",
+        "CCY": "CHF",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "VIATRIS INC.",
+        "Nick": "VTRS",
+        "Ticker": "VTRS",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "CATERPILLAR INC.",
+        "Nick": "CAT",
+        "Ticker": "WBA",
+        "CCY": "NONE",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "EXXON MOBIL CORPORATION",
+        "Nick": "XOM",
+        "Ticker": "XOM",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "XPERI INC.",
+        "Nick": "XPER",
+        "Ticker": "XPER",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Dont Nod Entertainment SA",
+        "Nick": "MVEALDNE",
+        "Ticker": "ALDNE.PA",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "3D SYSTEMS CORPORATION",
+        "Nick": "MVEDDD",
+        "Ticker": "DDD",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Dassault Systemes SE",
+        "Nick": "MVEDSY",
+        "Ticker": "DSY.PA",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "E.ON SE",
+        "Nick": "MVEEOAN",
+        "Ticker": "EOAN.DE",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Eni SpA",
+        "Nick": "MVEENI",
+        "Ticker": "ENI.MI",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": null,
+        "Nick": "MVEEZJ",
+        "Ticker": "EZJ.L",
+        "CCY": "NONE",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": "MVEEPIX"
+    },
+    {
+        "Name": "Societe Generale SA",
+        "Nick": "MVEGLE",
+        "Ticker": "GLE.PA",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Orange SA",
+        "Nick": "MVEORA",
+        "Ticker": "ORA.PA",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "RWE AG",
+        "Nick": "MVERWE",
+        "Ticker": "RWE.DE",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "SAP SE",
+        "Nick": "MVESAP",
+        "Ticker": "SAP.DE",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Uniper SE",
+        "Nick": "MVEUN0",
+        "Ticker": "UN0.DE",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "APPLE INC.",
+        "Nick": "SAFAAPL",
+        "Ticker": "AAPL",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "AMAZON.COM, INC.",
+        "Nick": "SAFAMZN",
+        "Ticker": "AMZN",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "ASML Holding NV",
+        "Nick": "SAFASML",
+        "Ticker": "ASML.AS",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "3D SYSTEMS CORPORATION",
+        "Nick": "SAFDDD",
+        "Ticker": "DDD",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "THE WALT DISNEY COMPANY",
+        "Nick": "SAFDIS",
+        "Ticker": "DIS",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "GENERAL MOTORS COMPANY",
+        "Nick": "SAFGM",
+        "Ticker": "GM",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "International Consolidated Airlines Group SA",
+        "Nick": "SAFIAG",
+        "Ticker": "IAG.L",
+        "CCY": "GBp",
+        "Status": "active",
+        "Scale": 0.01,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "MODERNA, INC.",
+        "Nick": "SAFMRNA",
+        "Ticker": "MRNA",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "BLINK CHARGING CO.",
+        "Nick": "BLNK",
+        "Ticker": "BLNK",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Eni SpA",
+        "Nick": "ENI",
+        "Ticker": "ENI.MI",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "EASYJET PLC",
+        "Nick": "SAFEZJ",
+        "Ticker": "EZJ.L",
+        "CCY": "GBp",
+        "Status": "active",
+        "Scale": 0.01,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "FORD MOTOR COMPANY",
+        "Nick": "F",
+        "Ticker": "F",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Societe Generale SA",
+        "Nick": "GLE",
+        "Ticker": "GLE.PA",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "GENERAC HOLDINGS INC.",
+        "Nick": "GNRC",
+        "Ticker": "GNRC",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "THE GOLDMAN SACHS GROUP, INC.",
+        "Nick": "GS",
+        "Ticker": "GS",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "LUMINAR TECHNOLOGIES, INC.",
+        "Nick": "LAZRQ",
+        "Ticker": "LAZRQ",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "SOUTHWEST AIRLINES CO.",
+        "Nick": "LUV",
+        "Ticker": "LUV",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "MASTERCARD INCORPORATED",
+        "Nick": "MA",
+        "Ticker": "MA",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "NOVAVAX, INC.",
+        "Nick": "NVAX",
+        "Ticker": "NVAX",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Novartis Inc.",
+        "Nick": "NVS",
+        "Ticker": "NVS",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Orange SA",
+        "Nick": "ORA",
+        "Ticker": "ORA.PA",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "OCCIDENTAL PETROLEUM CORPORATION",
+        "Nick": "OXY",
+        "Ticker": "OXY",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "PFIZER INC.",
+        "Nick": "PFE",
+        "Ticker": "PFE",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "Transocean Ltd",
+        "Nick": "RIG",
+        "Ticker": "RIG",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "RANGE RESOURCES CORPORATION",
+        "Nick": "RRC",
+        "Ticker": "RRC",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "BLOCK, INC.",
+        "Nick": "XYZ",
+        "Ticker": "XYZ",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "TENET HEALTHCARE CORPORATION",
+        "Nick": "THC",
+        "Ticker": "THC",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "HP INC.",
+        "Nick": "SAFHPQ",
+        "Ticker": "HPQ",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "iShs Digtl Sec UCITS ETF USD A",
+        "Nick": "LOCK",
+        "Ticker": "LOCK.L",
+        "CCY": "USD",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "ASML Holding NV",
+        "Nick": "JBASML",
+        "Ticker": "ASML.AS",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    },
+    {
+        "Name": "E.ON SE",
+        "Nick": "JBEOAN",
+        "Ticker": "EOAN.DE",
+        "CCY": "EUR",
+        "Status": "active",
+        "Scale": 1.0,
+        "Stock_Exchange_Name": null
+    }
+]
