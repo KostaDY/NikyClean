@@ -6,7 +6,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Apple Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "ADEIA INC.",
@@ -15,7 +19,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Adeia Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "AFENTRA PLC",
@@ -24,7 +32,11 @@
         "CCY": "GBp",
         "Status": "active",
         "Scale": 0.01,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Afentra PLC Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "AMAZON.COM, INC.",
@@ -33,7 +45,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Amazon.com Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Dont Nod Entertainment SA",
@@ -42,7 +58,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Don't Nod Entertainment SA Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "ASML Holding NV",
@@ -51,7 +71,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "ASML Holding NV Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "BROADCOM INC.",
@@ -60,7 +84,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Broadcom Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "ASTRAZENECA PLC",
@@ -69,7 +97,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": null,
+        "Unnamed: 10": NaN
     },
     {
         "Name": "BALLARD POWER SYSTEMS INC.",
@@ -78,7 +110,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Ballard Power Systems Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "BIOMERICA, INC.",
@@ -87,7 +123,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Biomerica Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "CITIGROUP INC.",
@@ -96,7 +136,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Citigroup Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "CISCO SYSTEMS, INC.",
@@ -105,7 +149,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Cisco Systems Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "CVS HEALTH CORPORATION",
@@ -114,7 +162,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "CVS Health Corp Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "3D SYSTEMS CORPORATION",
@@ -123,7 +175,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "3D Systems Corp Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "THE WALT DISNEY COMPANY",
@@ -132,7 +188,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "The Walt Disney Company Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Dassault Systemes SE",
@@ -141,7 +201,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Dassault Systemes SE Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "DAVITA INC.",
@@ -150,7 +214,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "DaVita Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "DXC TECHNOLOGY COMPANY",
@@ -159,16 +227,24 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "DXC Technology Company Registered",
+        "Unnamed: 10": NaN
     },
     {
-        "Name": "E.ON SE",
+        "Name": "E.ON DE",
         "Nick": "EOAN",
         "Ticker": "EOAN.DE",
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": "Echo Automotive Inc Registered",
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "E.ON SE Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "EASYJET PLC",
@@ -177,7 +253,11 @@
         "CCY": "GBp",
         "Status": "active",
         "Scale": 0.01,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": "Energy Conversion Devices Inc",
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "easyJet PLC Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "GENERAL MOTORS COMPANY",
@@ -186,7 +266,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "General Motors Co Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "HEWLETT PACKARD ENTERPRISE COMPANY",
@@ -195,7 +279,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": "Evofem Biosciences Inc Registered",
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Hewlett Packard Enterprise Co Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "HP INC.",
@@ -204,7 +292,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "HP Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "International Consolidated Airlines Group SA",
@@ -213,7 +305,11 @@
         "CCY": "GBp",
         "Status": "active",
         "Scale": 0.01,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "International Consolidated Airlines Group SA Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "THE KROGER CO.",
@@ -222,16 +318,24 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Kroger Co Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "LENSAR, INC.",
         "Nick": "LNSR",
         "Ticker": "LNSR",
         "CCY": "USD",
-        "Status": "active",
+        "Status": "cancel",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": null,
+        "Unnamed: 10": NaN
     },
     {
         "Name": "LUMEN TECHNOLOGIES, INC.",
@@ -240,7 +344,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Lumen Technologies Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "MODERNA, INC.",
@@ -249,7 +357,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Moderna Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "MICROSOFT CORPORATION",
@@ -258,7 +370,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Microsoft Corp Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "NEXTERA ENERGY, INC.",
@@ -267,7 +383,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "NextEra Energy Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "NEWMONT CORPORATION",
@@ -276,7 +396,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Newmont Corporation Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "NETFLIX, INC.",
@@ -285,7 +409,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Netflix Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "FISCALNOTE HOLDINGS, INC.",
@@ -294,7 +422,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "FiscalNote Holdings Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Pan American Silver Corp.",
@@ -303,7 +435,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Pan American Silver Corp Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Profound Medical Corp.",
@@ -312,7 +448,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Profound Medical Corp Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "POET Technologies Inc.",
@@ -321,7 +461,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "POET Technologies Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "POWER REIT",
@@ -330,7 +474,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Power REIT Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "RIGEL PHARMACEUTICALS, INC.",
@@ -339,7 +487,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Rigel Pharmaceuticals Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "RWE AG",
@@ -348,7 +500,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": "PDL Biopharma Inc Registered",
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "RWE AG Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "SAP SE",
@@ -357,7 +513,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "SAP SE Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Shin-Etsu Chemical Co., Ltd.",
@@ -366,7 +526,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Shin-Etsu Chemical Co Ltd ADR",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "STRATASYS LTD",
@@ -375,7 +539,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Stratasys Ltd Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "TESLA, INC.",
@@ -384,7 +552,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Tesla Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Taiwan Semiconductor Manufacturing Company Limited",
@@ -393,7 +565,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": "Right Blazing Star",
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Taiwan Semiconductor Manufacturing Co Ltd ADR",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Uniper SE",
@@ -402,7 +578,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": "Right XenoTherapeutics",
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Uniper SE Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "UNITI GROUP INC.",
@@ -411,7 +591,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": "RVL Pharmaceuticals PLC Registered",
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": null,
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Volvo AB",
@@ -420,7 +604,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Volvo AB ADR",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Vontobel Holding Ltd",
@@ -429,7 +617,11 @@
         "CCY": "CHF",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Vontobel Holding AG Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "VIATRIS INC.",
@@ -438,16 +630,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
-    },
-    {
-        "Name": "CATERPILLAR INC.",
-        "Nick": "CAT",
-        "Ticker": "CAT",
-        "CCY": "NONE",
-        "Status": "active",
-        "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Viatris Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "EXXON MOBIL CORPORATION",
@@ -456,7 +643,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Exxon Mobil Corp Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "XPERI INC.",
@@ -465,7 +656,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Xperi Inc Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Dont Nod Entertainment SA",
@@ -474,7 +669,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Don't Nod Entertainment SA Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "3D SYSTEMS CORPORATION",
@@ -483,7 +682,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "3D Systems Corp Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Dassault Systemes SE",
@@ -492,7 +695,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Dassault Systemes SE Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "E.ON SE",
@@ -501,7 +708,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": "Trade School Go Inc Registered",
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "E.ON SE Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Eni SpA",
@@ -510,16 +721,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
-    },
-    {
-        "Name": null,
-        "Nick": "MVEEZJ",
-        "Ticker": "EZJ.L",
-        "CCY": "NONE",
-        "Status": "active",
-        "Scale": 1.0,
-        "Stock_Exchange_Name": "MVEEPIX"
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "ENI S.p.A. Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Societe Generale SA",
@@ -528,7 +734,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Societe Generale SA Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Orange SA",
@@ -537,7 +747,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Orange SA",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "RWE AG",
@@ -546,7 +760,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "RWE AG Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "SAP SE",
@@ -555,7 +773,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "SAP SE Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Uniper SE",
@@ -564,7 +786,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": NaN,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Orange SA",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "APPLE INC.",
@@ -573,7 +799,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Apple Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "AMAZON.COM, INC.",
@@ -582,7 +812,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Amazon.com Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "ASML Holding NV",
@@ -591,7 +825,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "ASML Holding NV Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "3D SYSTEMS CORPORATION",
@@ -600,7 +838,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "3D Systems Corp",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "THE WALT DISNEY COMPANY",
@@ -609,7 +851,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Walt Disney Company",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "GENERAL MOTORS COMPANY",
@@ -618,7 +864,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "General Motors Co Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "International Consolidated Airlines Group SA",
@@ -627,7 +877,11 @@
         "CCY": "GBp",
         "Status": "active",
         "Scale": 0.01,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "International Consolidated Airlines Group SA Registered",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "MODERNA, INC.",
@@ -636,7 +890,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Moderna Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "BLINK CHARGING CO.",
@@ -645,7 +903,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Blink Charging Co",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Eni SpA",
@@ -654,7 +916,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "ENI Spa",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "EASYJET PLC",
@@ -663,16 +929,24 @@
         "CCY": "GBp",
         "Status": "active",
         "Scale": 0.01,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Easyjet Plc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "FORD MOTOR COMPANY",
         "Nick": "F",
         "Ticker": "F",
         "CCY": "USD",
-        "Status": "active",
+        "Status": "zero",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Ford Motor Company",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Societe Generale SA",
@@ -681,34 +955,50 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Societe Generale SA Bearer",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "GENERAC HOLDINGS INC.",
         "Nick": "GNRC",
         "Ticker": "GNRC",
         "CCY": "USD",
-        "Status": "active",
+        "Status": "zero",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Generac Holdings Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "THE GOLDMAN SACHS GROUP, INC.",
         "Nick": "GS",
         "Ticker": "GS",
         "CCY": "USD",
-        "Status": "active",
+        "Status": "zero",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Goldman Sacks Group Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "LUMINAR TECHNOLOGIES, INC.",
         "Nick": "LAZRQ",
         "Ticker": "LAZRQ",
         "CCY": "USD",
-        "Status": "active",
+        "Status": "bankropt",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Laminar Technologies Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "SOUTHWEST AIRLINES CO.",
@@ -717,7 +1007,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Southwest Airlines Co",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "MASTERCARD INCORPORATED",
@@ -726,7 +1020,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Mastercard Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "NOVAVAX, INC.",
@@ -735,16 +1033,24 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Novavax Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Novartis Inc.",
         "Nick": "NVS",
         "Ticker": "NVS",
         "CCY": "USD",
-        "Status": "active",
+        "Status": "zero",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Novartis Inc.",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Orange SA",
@@ -753,7 +1059,11 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Orange SA",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "OCCIDENTAL PETROLEUM CORPORATION",
@@ -762,7 +1072,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Occidental Petroleum Corp",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "PFIZER INC.",
@@ -771,7 +1085,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Pfizer Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "Transocean Ltd",
@@ -780,7 +1098,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Transocean Ltd Nam.",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "RANGE RESOURCES CORPORATION",
@@ -789,7 +1111,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Range Resources Corp",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "BLOCK, INC.",
@@ -798,7 +1124,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Block Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "TENET HEALTHCARE CORPORATION",
@@ -807,7 +1137,11 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Tenet Healthcare Corp",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "HP INC.",
@@ -816,16 +1150,24 @@
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "HP Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "iShs Digtl Sec UCITS ETF USD A",
         "Nick": "LOCK",
-        "Ticker": "LOCK.L",
+        "Ticker": "LOCK.LON",
         "CCY": "USD",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Locks Inc",
+        "Unnamed: 10": NaN
     },
     {
         "Name": "ASML Holding NV",
@@ -834,15 +1176,114 @@
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "ASML Holding NV Bearer",
+        "Unnamed: 10": NaN
     },
     {
-        "Name": "E.ON SE",
+        "Name": "EOAN DE",
         "Nick": "JBEOAN",
         "Ticker": "EOAN.DE",
         "CCY": "EUR",
         "Status": "active",
         "Scale": 1.0,
-        "Stock_Exchange_Name": null
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "E.ON SE Registered",
+        "Unnamed: 10": NaN
+    },
+    {
+        "Name": "INTERNATIONAL BUSINESS MACHINES",
+        "Nick": "IBM",
+        "Ticker": "IBM",
+        "CCY": "USD",
+        "Status": "watch",
+        "Scale": 1.0,
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "IBM INC.",
+        "Unnamed: 10": NaN
+    },
+    {
+        "Name": "CATERPILLAR INC.",
+        "Nick": "CAT",
+        "Ticker": "CAT",
+        "CCY": "USD",
+        "Status": "watch",
+        "Scale": 1.0,
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "CATERPILLAR Inc.",
+        "Unnamed: 10": NaN
+    },
+    {
+        "Name": "ALPHABET INC.",
+        "Nick": "GOOG",
+        "Ticker": "GOOG",
+        "CCY": "USD",
+        "Status": "watch",
+        "Scale": 1.0,
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Alphabet Inc.",
+        "Unnamed: 10": NaN
+    },
+    {
+        "Name": null,
+        "Nick": "7011T",
+        "Ticker": "7011.T",
+        "CCY": "JPY",
+        "Status": "activ",
+        "Scale": 1.0,
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": "7011.T",
+        "Unnamed: 9": "Mitsubishi Heavy Industries Ltd Registered",
+        "Unnamed: 10": NaN
+    },
+    {
+        "Name": null,
+        "Nick": "SAFNEM",
+        "Ticker": "NEM",
+        "CCY": "USD",
+        "Status": "activ",
+        "Scale": 1.0,
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Newmont Corporation",
+        "Unnamed: 10": NaN
+    },
+    {
+        "Name": null,
+        "Nick": "SAFUNIT",
+        "Ticker": "UNIT",
+        "CCY": "USD",
+        "Status": "activ",
+        "Scale": 1.0,
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Uniti Group Inc",
+        "Unnamed: 10": NaN
+    },
+    {
+        "Name": null,
+        "Nick": "SAFSDZ",
+        "Ticker": "SDZ.SW",
+        "CCY": "CHF",
+        "Status": "activ",
+        "Scale": 1.0,
+        "Commission": 0.0027,
+        "Bank_Name": null,
+        "Stock_Exchange_Name": null,
+        "Unnamed: 9": "Sandoz Group AG",
+        "Unnamed: 10": 63.6
     }
 ]
