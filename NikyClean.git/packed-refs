@@ -1,0 +1,11 @@
+# pack-refs with: peeled fully-peeled sorted 
+3157ffdeadea1461fb873b6d34b43e3ee291c43b refs/heads/RSI
+7d7e310a4f9566a1c4eeb3e96ce3b17df499bd38 refs/heads/live-session
+81eb7aae5b3ad0b9a7a3dec3f00a0084eeb7fe0a refs/heads/main
+0c845e40b536b343f88039377e20f8b160821794 refs/heads/rescue-121525
+f863bc336df26fa96f147a07a53ae8a219f84798 refs/heads/solid
+0d0eacf9bc48e095016f38b4bcb9c4f880942a2b refs/heads/test
+f145fdcc04b8e9aa8822773147c833d7a2159b12 refs/heads/test1
+f863bc336df26fa96f147a07a53ae8a219f84798 refs/heads/test2
+70c9851d8fd79a9f3ea8362bb7aa9ce50cf7b51e refs/heads/testlog
+4ddc58b321e2dcfd13850ee569cde68742f1eca5 refs/heads/work
