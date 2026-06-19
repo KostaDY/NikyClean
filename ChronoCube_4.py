@@ -16,7 +16,7 @@ from openpyxl.utils.cell import range_boundaries
 # CONFIG
 # ==========================================================
 
-WORKBOOK = Path("Entry_RSI.xlsm")
+WORKBOOK = Path("Entry_SHIFT.xlsm")
 SHEET_NAME = "Calc"
 TABLE_NAME = "TabCalc"
 
